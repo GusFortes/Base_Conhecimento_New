@@ -1,0 +1,151 @@
+﻿@model Base_Conhecimento.Solucao
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-white">
+            <h4>Add New </h4>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" asp-action="Salvar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="titulo" class="control-label"></label>
+                            <input asp-for="titulo" class="form-control" />
+                            <span asp-validation-for="titulo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="arquivos" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="arquivos" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                            <span asp-validation-for="arquivos" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="descricao" class="control-label"></label>
+                            <textarea input asp-for="descricao" class="form-control textarea-autosize"> </textarea>
+                            <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                    <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h1>Base de Conhecimento</h1>
+    <h3>Criar Solução</h3>
+    <h4 align-center>Preencha os campos abaixo: </h4>
+
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="titulo" class="control-label"></label>
+                <input asp-for="titulo" class="form-control" />
+                <span asp-validation-for="titulo" class="text-danger"></span>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="descricao" class="control-label"></label>
+                <input asp-for="descricao" class="form-control" />
+                <span asp-validation-for="descricao" class="text-danger"></span>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="descricao" class="control-label"></label>
+                <input asp-for="descricao" class="form-control" />
+                <span asp-validation-for="descricao" class="text-danger"></span>
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <select asp-for="visualizacao" value="Selecione">
+                <option value="Selecione">Selecione</option>
+                <option value="Analista">Analista</option>
+                <option value="Cliente">Cliente</option>
+            </select>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="FormFile" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="FormFile" class="custom-file-input">
+                        <label class="custom-file-label" for="customFile">Choose file </label>
+                    </div>
+                    <span asp-validation-for="FormFile" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <input asp-action="Salvar" type="submit" value="Salvar" />
+            </div>
+            <div class="form-group">
+                <input asp-action="Index" type="submit" value="Voltar" />
+            </div>
+        </form>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    }*@
+

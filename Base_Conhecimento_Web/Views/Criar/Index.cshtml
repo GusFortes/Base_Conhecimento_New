@@ -1,0 +1,59 @@
+﻿@model Base_Conhecimento.Chamado
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <link href="~/css/criar.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h3>Criar Solução</h3>
+    <h4 align-center>Preencha os campos abaixo: </h4>
+
+    <div class="col-md-10 mx-auto py-4" class="formulario">
+
+        <div class="card">
+
+            <div class="card-header bg-primary text-uppercase text-white">
+                <h4>Descreva o chamado </h4>
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" asp-action="Avancar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="chamadoID" class="control-label"></label>
+                                <input asp-for="chamadoID" class="form-control" />
+                                <span asp-validation-for="chamadoID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="itemCatalogo" class="control-label"></label>
+                                <input asp-for="itemCatalogo" class="form-control" />
+                                <span asp-validation-for="itemCatalogo" class="text-danger"></span>
+                            </div>
+                            <span asp-validation-for="itemCatalogo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label asp-for="descricao" class="control-label"></label>
+                                <textarea input asp-for="descricao" class="form-control textarea-autosize"> </textarea>
+                                <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input asp-action="Avancar" type="submit" value="Próximo" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-action="Index" type="submit" value="Voltar" />
+                    </div>
+
+                </form>
+            </div>
+</body>

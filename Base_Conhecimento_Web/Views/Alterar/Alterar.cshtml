@@ -1,0 +1,53 @@
+﻿@model Base_Conhecimento.Solucao
+
+@{
+    ViewData["Title"] = "Alterar Solução";
+
+}
+
+
+
+    <form asp-action="Alterar">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+            </div>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            Visualização
+            <select asp-for="visualizacao" value="Selecione">
+                <option value="Selecione">Selecione</option>
+                <option value="Analista">Analista</option>
+                <option value="Cliente">Cliente</option>
+            </select>
+            <br>
+            <br>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            Status
+            <select asp-for="status" value="Selecione">
+                <option value="Selecione">Selecione</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Desativado">Desativado</option>
+            </select>
+
+            <div class="form-group">
+                <input asp-action="Salvar" type="submit" value="Salvar" />
+                <input asp-action="Index" type="submit" value="Voltar" />
+            </div>
+</form>
+
+<div class="form-group">
+    <input asp-action="Index" type="submit" value="Voltar" />
+</div>

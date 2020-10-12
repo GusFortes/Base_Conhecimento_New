@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Base_Conhecimento.ChamadoSolucaoViewModel>
+
+
+@{
+    ViewData["Title"] = "Solução Salva";
+
+}
+
+<div>
+    <h2> @Html.DisplayNameFor(model => model.chamadoModel.descricao)</h2>
+</div>
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        @Html.DisplayFor(modelItem => item.chamadoModel.descricao)
+    </div>
+
+}
+
+<div class="card-body">
+    @foreach (var item in Model)
+    {
+        <h2> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h2>
+        <div class="row">
+            Data atualização
+            @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
+        </div>
+
+        <div class="col-10">
+            <div class="row">
+                <div class="col-md-10">
+                    <p>@Html.DisplayFor(modelItem => item.solucaoModel.descricao)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+
+        </div>
+
+    }
+    <div class="form-group">
+        <input asp-action="Index" type="submit" value="Voltar" />
+    </div>
+</div>
+
+

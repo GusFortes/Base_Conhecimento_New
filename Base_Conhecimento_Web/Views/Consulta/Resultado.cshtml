@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Base_Conhecimento.Solucao>
+
+@{
+    ViewData["Title"] = "Solução Encontrada";
+
+}
+
+<h1>Solução Encontrada</h1>
+
+<table class="table" align="center">
+    <thead>
+        <tr>
+            <th>
+                 @Html.DisplayNameFor(model => model.solucaoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.solucaoID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titulo)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.descricao)
+                </th>
+            </tr>
+        }
+    </tbody>
+         
+</table>
+<div class="form-group">
+    <input asp-action="Index" type="submit" value="Voltar" />
+</div>

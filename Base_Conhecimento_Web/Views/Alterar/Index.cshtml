@@ -1,0 +1,24 @@
+﻿@model Base_Conhecimento.Solucao
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Base de Conhecimento</h1>
+
+<h4 align-center>Consulte a solução do seu problema: </h4>
+<div class="col-md-4">
+    <form asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="solucaoID" class="control-label"></label>
+            <input asp-for="solucaoID" class="form-control"/>
+            <span asp-validation-for="solucaoID" class="text-danger"> </span>
+        </div>
+
+        <div class="form-group">
+            <input asp-action="Consultar" type="submit" value="Consultar" />
+            <input asp-action="Index" type="submit" value="Voltar" />
+        </div>
+    </form>
+</div>
