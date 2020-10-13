@@ -9,21 +9,27 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Base_Conhecimento_Web.Controllers
 {
-    [Authorize]
     public class CriarController : Controller
     {
         private FachadaBase fachada = FachadaBase.getInstance();
-
+        public static int id = 0;
 
         public IActionResult Index()
         {
-            return View();
+            Usuario user = fachada.Login(id);
+
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Avancar(Chamado cham)
         {
-
-
             fachada.registrarChamado(cham);
             return View("Solucao");
         }
@@ -31,8 +37,6 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Salvar(Solucao sol)
         {
-
-
             if (fachada.persistirSolucao(sol) != null)
             {
 

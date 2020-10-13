@@ -21,7 +21,7 @@ namespace Base_Conhecimento
         public String titulo { get; set; }
         [Display(Name = "Título")]
 
-        public String usuarioID { get; set; }
+        public int usuarioID { get; set; }
 
         public String descricao { get; set; }
         [Display(Name = "Descrição")]
@@ -52,9 +52,9 @@ namespace Base_Conhecimento
             return solucaoDao.alterarSolucao(solucao);
         }
 
-        public List<Solucao> consultaSolucoes(String problema)
+        public List<Solucao> consultaSolucoes(String problema, Usuario usuario)
         {
-            return solucaoDao.consultaSolucoes(problema);
+            return solucaoDao.consultaSolucoes(problema,  usuario);
         }
     }
 }

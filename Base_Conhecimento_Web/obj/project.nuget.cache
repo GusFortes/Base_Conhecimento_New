@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zTZ848pkSqE1TRquGGab2oKIl7oH/9P7Kbs0Shd1W3Qxf6NG5lPQ/hkr4riMkFTUcdUtwc0qMh05Tws2nSVMlg==",
+  "dgSpecHash": "DLOl0bhSG5SWfIEHduRZ9beagz64WeCwHZBIsDqn+WxvmTbrk9BKT9AYsagV91OkXe9XrpHglvpqSMM0xgbJXQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento_Web\\Base_Conhecimento_Web.csproj",
+  "projectFilePath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento_Web\\Base_Conhecimento_Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gus_f\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\gus_f\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.6\\microsoft.aspnetcore.cryptography.internal.3.1.6.nupkg.sha512",

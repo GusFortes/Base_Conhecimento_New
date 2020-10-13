@@ -6,7 +6,7 @@ namespace Base_Conhecimento.DAO
 {
     interface IUsuarioDAO
     {
-        public byte consultaUsuario(Usuario usuario);
+        public Usuario consultaUsuario(int id);
 
     }
 }

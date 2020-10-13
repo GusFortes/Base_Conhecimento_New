@@ -6152,11 +6152,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento_Web\\Base_Conhecimento_Web.csproj",
+      "projectUniqueName": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento_Web\\Base_Conhecimento_Web.csproj",
       "projectName": "Base_Conhecimento_Web",
-      "projectPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento_Web\\Base_Conhecimento_Web.csproj",
+      "projectPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento_Web\\Base_Conhecimento_Web.csproj",
       "packagesPath": "C:\\Users\\gus_f\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento_Web\\obj\\",
+      "outputPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento_Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6175,8 +6175,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento\\Base_Conhecimento.csproj": {
-              "projectPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento\\Base_Conhecimento.csproj"
+            "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj": {
+              "projectPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj"
             }
           }
         }

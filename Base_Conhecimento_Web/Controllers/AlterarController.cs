@@ -12,10 +12,20 @@ namespace Base_Conhecimento_Web.Controllers
     public class AlterarController : Controller
     {
         private FachadaBase fachada = FachadaBase.getInstance();
+        public static int id = 0;
 
         public IActionResult Index()
         {
-            return View();
+            Usuario user = fachada.Login(id);
+
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]

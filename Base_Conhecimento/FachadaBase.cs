@@ -8,10 +8,12 @@ namespace Base_Conhecimento
     public class FachadaBase
     {
         SolucaoDAO solucaoDao = new SolucaoDAO();
+        UsuarioDAO usuarioDao = new UsuarioDAO();
         private Solucao solucaoaux = new Solucao();
         public static FachadaBase fachada;
         private Chamado chamadoaux;
-        
+        public static Usuario usuarioLogado;
+
 
         public void registrarChamado(Chamado cham)
         {
@@ -38,7 +40,7 @@ namespace Base_Conhecimento
 
         public List<Solucao> consultaSolucoes(String problema)
         {
-            return solucaoDao.consultaSolucoes(problema);
+            return solucaoDao.consultaSolucoes(problema, usuarioLogado);
         }
 
         public Chamado retornarChamado()
@@ -59,8 +61,18 @@ namespace Base_Conhecimento
             // this.solucaoaux.solucaoID = this.id;
             this.solucaoaux.titulo = sol.titulo;
             this.solucaoaux.descricao = sol.descricao;
+            this.solucaoaux.usuarioID = usuarioLogado.usuarioID;
 
             return solucaoDao.alterarSolucao(solucaoaux);
+        }
+
+        public Usuario Login(int id)
+        {
+            if (usuarioLogado == null)
+            {
+                usuarioLogado = usuarioDao.consultaUsuario(id);
+            }
+            return usuarioLogado;
         }
 
     }

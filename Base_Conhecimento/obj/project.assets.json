@@ -6083,11 +6083,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento\\Base_Conhecimento.csproj",
+      "projectUniqueName": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj",
       "projectName": "Base_Conhecimento",
-      "projectPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento\\Base_Conhecimento.csproj",
+      "projectPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj",
       "packagesPath": "C:\\Users\\gus_f\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento\\Base_Conhecimento\\obj\\",
+      "outputPath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
