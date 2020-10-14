@@ -135,4 +135,11 @@ C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\obj\Debug\ne
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\obj\Debug\netcoreapp3.1\Base_Conhecimento.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\obj\Debug\netcoreapp3.1\Base_Conhecimento.pdb
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\obj\Debug\netcoreapp3.1\Base_Conhecimento.genruntimeconfig.cache
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento\obj\Debug\netcoreapp3.1\Base_Conhecimento.csproj.CoreCompileInputs.cache

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Web.Mvc;
 
 namespace Base_Conhecimento
 {
@@ -11,12 +12,12 @@ namespace Base_Conhecimento
         public String chamadoID { get; set; }
 
 
-        public String usuarioID { get; set; }
+        public int usuarioID { get; set; }
 
         [Display(Name = "Código da Solução")]
         public int solucaoID { get; set; }
 
-
+        [AllowHtml]
         [Display(Name = "Descrição do Chamado")]
         public String descricao { get; set; }
 

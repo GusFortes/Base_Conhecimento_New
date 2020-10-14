@@ -4,53 +4,102 @@
     ViewData["Title"] = "Index";
 }
 
+}
+<!DOCTYPE html>
 
-<div class="col-md-10 mx-auto py-4">
-    <div class="card">
-        <div class="card-header bg-primary text-uppercase text-white">
-            <h4>Add New </h4>
-        </div>
-        <div class="card-body">
-            <form enctype="multipart/form-data" asp-action="Salvar">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="titulo" class="control-label"></label>
-                            <input asp-for="titulo" class="form-control" />
-                            <span asp-validation-for="titulo" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="arquivos" class="control-label"></label>
-                            <div class="custom-file">
-                                <input asp-for="arquivos" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+<html lang="pt-br">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tiny.cloud/1/zjb6w3k3xzz82wgr316q63um7yvb1xnp47lizxn6phkcvuhm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            plugin: 'a_tinymce_plugin',
+            a_plugin_option: true,
+            a_configuration_option: 400
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <div class="col-md-10 mx-auto py-4">
+        <div class="card">
+            <div class="card-header bg-primary text-uppercase text-white">
+                <h4>Add New </h4>
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" asp-action="Salvar" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="titulo" class="control-label"></label>
+                                <input asp-for="titulo" class="form-control" />
+                                <span asp-validation-for="titulo" class="text-danger"></span>
                             </div>
-                            <span asp-validation-for="arquivos" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="arquivos" class="control-label"></label>
+                                <div class="custom-file">
+                                    <input asp-for="arquivos" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <span asp-validation-for="arquivos" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="descricao" class="control-label"></label>
-                            <textarea input asp-for="descricao" class="form-control textarea-autosize"> </textarea>
-                            <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
+                    <div class="row">
+                        <!-- Example single danger button -->
+                        <div class="btn-group">
+                            <select class="btn-primary" asp-for="visualizacao" value="Selecione">
+                                <option value="Quem pode visualizar">Selecione</option>
+                                <option value="Analista">Analista</option>
+                                <option value="Cliente">Cliente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="descricao" class="control-label"></label>
+                                <textarea input asp-for="descricao" class="form-control" id="mytextarea">
+                             
+                            </textarea>
+                                <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
-                    <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
-                </div>
-            </form>
+                    @*<div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="descricao" class="control-label"></label>
+                                    <textarea input asp-for="descricao" class="form-control textarea-autosize"> </textarea>
+                                    <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
+                                </div>
+                            </div>
+                        </div>*@
+
+
+                    <div class="form-group">
+                        <input type="submit" value="submit" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                        <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
+</body>
+</html>
 @section scripts{
     <script type="text/javascript">
         // Add the following code if you want the name of the file appear on select

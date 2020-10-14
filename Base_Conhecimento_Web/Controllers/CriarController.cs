@@ -28,26 +28,27 @@ namespace Base_Conhecimento_Web.Controllers
             }
         }
 
-        public IActionResult Avancar(Chamado cham)
-        {
-            fachada.registrarChamado(cham);
-            return View("Solucao");
-        }
+        //public IActionResult Avancar(Chamado cham)
+        //{
+        //    fachada.registrarChamado(cham);
+        //    return View("Solucao");
+        //}
 
         [HttpPost]
-        public IActionResult Salvar(Solucao sol)
+        public IActionResult Salvar(ChamadoSolucaoViewModel chamadoSolucao)
         {
+            Solucao sol = chamadoSolucao.solucaoModel;
+            Chamado cham = chamadoSolucao.chamadoModel;
+            fachada.registrarChamado(cham);
             if (fachada.persistirSolucao(sol) != null)
             {
-
+                
                 List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
-                ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
-                chamadoSolucao.chamadoModel = fachada.retornarChamado();
-                chamadoSolucao.solucaoModel = sol;
+                ChamadoSolucaoViewModel chamadoSolucaoView = new ChamadoSolucaoViewModel();
+                chamadoSolucaoView.chamadoModel = fachada.retornarChamado();
+                chamadoSolucaoView.solucaoModel = sol;
                 cs.Add(chamadoSolucao);
                 UploadedFile(sol);
-
-
                 return View("Salvar", cs);
             }
             else

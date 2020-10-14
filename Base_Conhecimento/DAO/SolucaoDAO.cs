@@ -14,7 +14,7 @@ namespace Base_Conhecimento.DAO
         public Solucao persistirSolucao(Solucao solucao, Chamado chamado)
         {
             int contador = (from s in db.Solucao
-                            select s).Count();
+                            select s).Count()+1;
 
             try
             {
@@ -23,7 +23,7 @@ namespace Base_Conhecimento.DAO
 
                     db.Solucao.Add(new Solucao
                     {
-                        solucaoID = contador + 1,
+                        solucaoID = contador,
                         titulo = solucao.titulo,
                         usuarioID = solucao.usuarioID,
                         descricao = solucao.descricao,

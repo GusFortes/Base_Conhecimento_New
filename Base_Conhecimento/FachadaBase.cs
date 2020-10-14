@@ -23,7 +23,8 @@ namespace Base_Conhecimento
         {
             chamadoaux.solucaoID = sol.solucaoID;
             sol.dataAtualizacao = DateTime.Now;
-
+            sol.usuarioID = usuarioLogado.usuarioID;
+            chamadoaux.usuarioID = usuarioLogado.usuarioID;
             return solucaoDao.persistirSolucao(sol, chamadoaux);
         }
 
