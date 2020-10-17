@@ -20,72 +20,105 @@ namespace Base_Conhecimento.DAO
             try
             {
                 if (solucao.arquivos == null)
-            {
-
-                db.Solucao.Add(new Solucao
                 {
-                    solucaoID = contador,
-                    titulo = solucao.titulo,
-                    usuarioID = solucao.usuarioID,
-                    descricao = solucao.descricao,
-                    dataAtualizacao = solucao.dataAtualizacao,
-                    visualizacao = solucao.visualizacao,
-                    status = "Ativo"
-                });
 
-                db.Chamado.Add(new Chamado
+                    db.Solucao.Add(new Solucao
+                    {
+                        solucaoID = contador,
+                        titulo = solucao.titulo,
+                        usuarioID = solucao.usuarioID,
+                        descricao = solucao.descricao,
+                        dataAtualizacao = solucao.dataAtualizacao,
+                        visualizacao = solucao.visualizacao,
+                        status = "Ativo"
+                    });
+
+                    db.Chamado.Add(new Chamado
+                    {
+                        chamadoID = chamado.chamadoID,
+                        descricao = chamado.descricao,
+                        usuarioID = chamado.usuarioID,
+                        solucaoID = contador,
+                        itemCatalogo = chamado.itemCatalogo
+                    });
+                    db.SaveChanges();
+
+                    solucao.solucaoID = contador;
+                    return solucao;
+                }
+
+                else
                 {
-                    chamadoID = chamado.chamadoID,
-                    descricao = chamado.descricao,
-                    usuarioID = chamado.usuarioID,
-                    solucaoID = contador,
-                    itemCatalogo = chamado.itemCatalogo
-                });
-                db.SaveChanges();
+                    String nomeArquivos = "";
+                    foreach (var nomeAquivoSolucao in solucao.arquivos)
+                    {
+                        nomeArquivos = nomeArquivos + "/" + nomeAquivoSolucao.FileName;
+                    }
 
-                solucao.solucaoID = contador;
-                return solucao;
+                    db.Solucao.Add(new Solucao
+                    {
+                        solucaoID = contador + 1,
+                        titulo = solucao.titulo,
+                        usuarioID = solucao.usuarioID,
+                        descricao = solucao.descricao,
+                        dataAtualizacao = solucao.dataAtualizacao,
+                        visualizacao = solucao.visualizacao,
+                        status = "Ativo",
+                        nomeArquivo = nomeArquivos
+                    });
+
+                    db.Chamado.Add(new Chamado
+                    {
+                        chamadoID = chamado.chamadoID,
+                        descricao = chamado.descricao,
+                        usuarioID = chamado.usuarioID,
+                        solucaoID = chamado.solucaoID,
+                        itemCatalogo = chamado.itemCatalogo
+                    });
+                    db.SaveChanges();
+
+                    solucao.solucaoID = contador++;
+                    return solucao;
+
+                }
+
             }
-
-            else
-            {
-
-                db.Solucao.Add(new Solucao
-                {
-                    solucaoID = contador + 1,
-                    titulo = solucao.titulo,
-                    usuarioID = solucao.usuarioID,
-                    descricao = solucao.descricao,
-                    dataAtualizacao = solucao.dataAtualizacao,
-                    visualizacao = solucao.visualizacao,
-                    status = "Ativo",
-
-
-                    // nomeArquivo = solucao.arquivos.FileName
-                });
-
-                db.Chamado.Add(new Chamado
-                {
-                    chamadoID = chamado.chamadoID,
-                    descricao = chamado.descricao,
-                    usuarioID = chamado.usuarioID,
-                    solucaoID = chamado.solucaoID,
-                    itemCatalogo = chamado.itemCatalogo
-                });
-                db.SaveChanges();
-
-                solucao.solucaoID = contador++;
-                return solucao;
-
-            }
-
-        }
             catch
             {
                 throw new NotImplementedException("Erro ao Gravar Solução. Verifique os dados e tente novamente.");
-    }
+            }
 
-}
+        }
+
+        public List<Chamado> consultaTodosChamados()
+        {
+            List<Chamado> chamados = new List<Chamado>();
+            var chamadosencontrados = from c in db.Chamado
+                                      select c;
+
+            foreach (Chamado cham in chamadosencontrados)
+            {
+                chamados.Add(cham);
+            }
+
+            return chamados;
+
+        }
+
+        public Chamado consultaChamadoId(String id)
+        {
+            Chamado chamado = new Chamado();
+
+            var c = from s in db.Chamado
+                    where s.chamadoID.Equals(id)
+                    select s;
+
+            foreach (Chamado cham in c)
+            {
+                chamado = cham;
+            }
+            return chamado;
+        }
 
         public List<Solucao> consultaTodasSolucoes()
         {
@@ -94,10 +127,23 @@ namespace Base_Conhecimento.DAO
                           select s;
 
 
-            foreach(Solucao sol in solucao)
+            foreach (Solucao sol in solucao)
             {
                 solucoes.Add(sol);
             }
+
+            foreach (Solucao sol in solucoes)
+            {
+                if (sol.nomeArquivo != null)
+                {
+                    List<String> arquivonome = new List<String>();
+                    foreach (String nomeaquivo in sol.nomeArquivo.Split("/"))
+                    {
+                        arquivonome.Add(nomeaquivo);
+                    }
+                }
+            }
+
 
             return solucoes;
         }

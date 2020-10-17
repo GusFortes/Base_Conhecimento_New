@@ -19,6 +19,11 @@ namespace Base_Conhecimento
             return solucaoDao.consultaTodasSolucoes();
         }
 
+        public List<Chamado> consultaTodosChamados()
+        {
+            return solucaoDao.consultaTodosChamados();
+        }
+
         public void registrarChamado(Chamado cham)
         {
             this.chamadoaux = cham;
@@ -41,6 +46,11 @@ namespace Base_Conhecimento
             }
             return fachada;
 
+        }
+
+        public Chamado consultaChamadoId(String id)
+        {
+            return solucaoDao.consultaChamadoId(id);
         }
 
         public List<Solucao> consultaSolucoes(String problema)

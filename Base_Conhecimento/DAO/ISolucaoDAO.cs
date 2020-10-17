@@ -8,13 +8,13 @@ namespace Base_Conhecimento.DAO
     {
         public Solucao persistirSolucao(Solucao solucao, Chamado chamado);
 
-        public List <Solucao> consultaSolucoes(String problema, Usuario usuario);
+        public List<Solucao> consultaSolucoes(String problema, Usuario usuario);
 
         public bool alterarSolucao(Solucao solucao);
         public Solucao consultaSolucaoId(int id);
         public List<Solucao> consultaTodasSolucoes();
-
-
+        public List<Chamado> consultaTodosChamados();
+        public Chamado consultaChamadoId(String id);
 
     }
 }

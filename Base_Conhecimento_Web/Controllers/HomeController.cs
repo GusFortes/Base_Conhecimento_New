@@ -14,7 +14,8 @@ namespace Base_Conhecimento.Controllers
         public IActionResult Index()
         {
             List<Solucao> solucoes = fachada.consultaTodasSolucoes();
-            return View(solucoes);
+            List<Chamado> chamados = fachada.consultaTodosChamados();
+            return View(chamados);
         }
 
         public IActionResult Privacy()
@@ -26,6 +27,19 @@ namespace Base_Conhecimento.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Solucao(String id)
+        {
+            List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
+            ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
+            chamadoSolucao.chamadoModel = fachada.consultaChamadoId(id);
+            chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(chamadoSolucao.chamadoModel.solucaoID);
+            
+            cs.Add(chamadoSolucao);
+            
+
+            return View("Solucao", cs);
         }
     }
 }

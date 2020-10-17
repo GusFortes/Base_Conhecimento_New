@@ -237,3 +237,4 @@ C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debu
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Solucao.cshtml.g.cs

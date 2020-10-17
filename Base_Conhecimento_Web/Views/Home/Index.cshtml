@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Base_Conhecimento.Solucao>
+﻿@model IEnumerable<Base_Conhecimento.Chamado>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -17,22 +17,34 @@
         <h1 class="display-4">Base de Conhecimento</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
+
+    <a href="~/Base/13_Anotação 2019-05-15 221049.png" download="13_Anotação 2019-05-15 221049.png">clique</a>
+
+
+
     <div class="container" id="solucao">
+        <section id="content">
 
-        <table class="table" align="center">
+            <table class="table">
 
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <th>
-                            @Html.DisplayFor(modelItem => item.solucaoID) - @Html.DisplayFor(modelItem => item.titulo)
-                            @Html.Raw(item.descricao)
-                        </th>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.chamadoID) - @*@Html.DisplayFor(modelItem => item.titulo)*@
+                                @Html.Raw(item.descricao)
+                            </th>
+                            <th>
+                            <th>
+                                @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoID }, new { @class = "label label-warning" })
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </section>
     </div>
 
 </body>

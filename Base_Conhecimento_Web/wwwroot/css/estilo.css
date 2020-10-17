@@ -1,12 +1,20 @@
 ﻿
 #solucao {
-    background-color: #F2F5FC;
-    margin: auto;
+    background-color: white;
+   
     border-radius: 10px;
     position: initial;
+    text-align:left;
   
     
 }
+
 body {
-/*    background-color: #FFFAFA;*/
+    
+    padding: 0px;
+    background: #edf1f3;
+    font-family: 'Lato', sans-serif;
+    font-size: 12pt;
+    font-weight: 300;
+    color: #8A8A8A;
 }
