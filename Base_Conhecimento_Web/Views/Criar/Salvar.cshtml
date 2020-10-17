@@ -5,44 +5,45 @@
     ViewData["Title"] = "Solução Salva";
 
 }
+<!DOCTYPE html>
 
-<div>
-    <h2> @Html.DisplayNameFor(model => model.chamadoModel.descricao)</h2>
-</div>
+<html lang="pt-br">
+
+<head>
+    <link href="~/css/criar.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container" id="chamado">
+        <h2> @Html.DisplayNameFor(model => model.chamadoModel.descricao)</h2>
 
 
-@foreach (var item in Model)
-{
-    <div class="row">
-        @Html.Raw(item.chamadoModel.descricao)
+        @foreach (var item in Model)
+        {
+            <p>@Html.Raw(item.chamadoModel.descricao)</p>
+        }
     </div>
-
-}
-
-<div class="card-body">
-    @foreach (var item in Model)
-    {
-        <h2> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h2>
-        <div class="row">
-            Data atualização
-            @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
-        </div>
-
-        <div class="col-10">
+    <div class="container" id="solucao">
+        @foreach (var item in Model)
+        {
+            <h2> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h2>
             <div class="row">
-                <div class="col-md-10">
-                    <p>@Html.Raw(item.solucaoModel.descricao)</p>
-                </div>
+                Data atualização
+                @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
             </div>
-        </div>
-        <div class="col">
 
-        </div>
+            <div class="container">
 
-    }
-    <div class="form-group">
-        <input asp-action="Index" type="submit" value="Voltar" />
+                @Html.Raw(item.solucaoModel.descricao)
+
+            </div>
+
+        }
+        <div class="form-group">
+            <input asp-action="Index" type="submit" value="Voltar" />
+        </div>
     </div>
-</div>
 
-
+</body>
+</html>

@@ -14,75 +14,92 @@ namespace Base_Conhecimento.DAO
         public Solucao persistirSolucao(Solucao solucao, Chamado chamado)
         {
             int contador = (from s in db.Solucao
-                            select s).Count()+1;
+                            select s).Count();
+            contador = contador + 1;
 
             try
             {
                 if (solucao.arquivos == null)
+            {
+
+                db.Solucao.Add(new Solucao
                 {
+                    solucaoID = contador,
+                    titulo = solucao.titulo,
+                    usuarioID = solucao.usuarioID,
+                    descricao = solucao.descricao,
+                    dataAtualizacao = solucao.dataAtualizacao,
+                    visualizacao = solucao.visualizacao,
+                    status = "Ativo"
+                });
 
-                    db.Solucao.Add(new Solucao
-                    {
-                        solucaoID = contador,
-                        titulo = solucao.titulo,
-                        usuarioID = solucao.usuarioID,
-                        descricao = solucao.descricao,
-                        dataAtualizacao = solucao.dataAtualizacao,
-                        visualizacao = solucao.visualizacao,
-                        status = "Ativo"
-                    });
-
-                    db.Chamado.Add(new Chamado
-                    {
-                        chamadoID = chamado.chamadoID,
-                        descricao = chamado.descricao,
-                        usuarioID = chamado.usuarioID,
-                        solucaoID = chamado.solucaoID,
-                        itemCatalogo = chamado.itemCatalogo
-                    });
-                    db.SaveChanges();
-
-                    solucao.solucaoID = contador++;
-                    return solucao;
-                }
-
-                else
+                db.Chamado.Add(new Chamado
                 {
+                    chamadoID = chamado.chamadoID,
+                    descricao = chamado.descricao,
+                    usuarioID = chamado.usuarioID,
+                    solucaoID = contador,
+                    itemCatalogo = chamado.itemCatalogo
+                });
+                db.SaveChanges();
 
-                    db.Solucao.Add(new Solucao
-                    {
-                        solucaoID = contador + 1,
-                        titulo = solucao.titulo,
-                        usuarioID = solucao.usuarioID,
-                        descricao = solucao.descricao,
-                        dataAtualizacao = solucao.dataAtualizacao,
-                        visualizacao = solucao.visualizacao,
-                        status = "Ativo",
+                solucao.solucaoID = contador;
+                return solucao;
+            }
 
-                        nomeArquivo = solucao.arquivos.FileName
-                    });
+            else
+            {
 
-                    db.Chamado.Add(new Chamado
-                    {
-                        chamadoID = chamado.chamadoID,
-                        descricao = chamado.descricao,
-                        usuarioID = chamado.usuarioID,
-                        solucaoID = chamado.solucaoID,
-                        itemCatalogo = chamado.itemCatalogo
-                    });
-                    db.SaveChanges();
+                db.Solucao.Add(new Solucao
+                {
+                    solucaoID = contador + 1,
+                    titulo = solucao.titulo,
+                    usuarioID = solucao.usuarioID,
+                    descricao = solucao.descricao,
+                    dataAtualizacao = solucao.dataAtualizacao,
+                    visualizacao = solucao.visualizacao,
+                    status = "Ativo",
 
-                    solucao.solucaoID = contador++;
-                    return solucao;
 
-                }
+                    // nomeArquivo = solucao.arquivos.FileName
+                });
+
+                db.Chamado.Add(new Chamado
+                {
+                    chamadoID = chamado.chamadoID,
+                    descricao = chamado.descricao,
+                    usuarioID = chamado.usuarioID,
+                    solucaoID = chamado.solucaoID,
+                    itemCatalogo = chamado.itemCatalogo
+                });
+                db.SaveChanges();
+
+                solucao.solucaoID = contador++;
+                return solucao;
 
             }
+
+        }
             catch
             {
                 throw new NotImplementedException("Erro ao Gravar Solução. Verifique os dados e tente novamente.");
+    }
+
+}
+
+        public List<Solucao> consultaTodasSolucoes()
+        {
+            List<Solucao> solucoes = new List<Solucao>();
+            var solucao = from s in db.Solucao
+                          select s;
+
+
+            foreach(Solucao sol in solucao)
+            {
+                solucoes.Add(sol);
             }
 
+            return solucoes;
         }
 
         public Solucao consultaSolucaoId(int id)
@@ -141,7 +158,8 @@ namespace Base_Conhecimento.DAO
                 foreach (Solucao se in solucao)
                 {
 
-                    if (se.visualizacao == "Analista"){
+                    if (se.visualizacao == "Analista")
+                    {
                         if (usuario != null && usuario.nivel)
                         {
                             solucoesencontradas.Add(se);

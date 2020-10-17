@@ -12,8 +12,9 @@ namespace Base_Conhecimento.DAO
 
         public bool alterarSolucao(Solucao solucao);
         public Solucao consultaSolucaoId(int id);
-        
-         
-        
+        public List<Solucao> consultaTodasSolucoes();
+
+
+
     }
 }

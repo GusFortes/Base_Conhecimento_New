@@ -10,9 +10,11 @@ namespace Base_Conhecimento.Controllers
 {
     public class HomeController : Controller
     {
+        private FachadaBase fachada = FachadaBase.getInstance();
         public IActionResult Index()
         {
-            return View();
+            List<Solucao> solucoes = fachada.consultaTodasSolucoes();
+            return View(solucoes);
         }
 
         public IActionResult Privacy()

@@ -43,7 +43,7 @@ namespace Base_Conhecimento
 
 
         [NotMapped]
-        public IFormFile arquivos { get; set; }
+        public List<IFormFile> arquivos { get; set; }
 
 
         public Solucao persistirSolucao(Solucao solucao, Chamado chamado)

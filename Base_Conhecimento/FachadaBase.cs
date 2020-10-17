@@ -14,6 +14,10 @@ namespace Base_Conhecimento
         private Chamado chamadoaux;
         public static Usuario usuarioLogado;
 
+        public List<Solucao> consultaTodasSolucoes()
+        {
+            return solucaoDao.consultaTodasSolucoes();
+        }
 
         public void registrarChamado(Chamado cham)
         {

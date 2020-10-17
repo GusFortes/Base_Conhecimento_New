@@ -40,7 +40,7 @@
                             @Html.DisplayFor(modelItem => item.titulo)
                         </td>
                         <th>
-                            @Html.DisplayFor(modelItem => item.descricao)
+                            @Html.Raw(item.descricao)
                         </th>
                         <th>
                             @Html.ActionLink("Alterar", "Alterar", new { id = item.solucaoID }, new { @class = "label label-warning" })

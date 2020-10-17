@@ -33,7 +33,7 @@
                     @Html.DisplayFor(modelItem => item.titulo)
                 </td>
                 <th>
-                    @Html.DisplayFor(modelItem => item.descricao)
+                    @Html.Raw(item.descricao)
                 </th>
             </tr>
         }

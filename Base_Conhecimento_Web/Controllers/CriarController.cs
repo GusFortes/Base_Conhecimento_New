@@ -42,7 +42,7 @@ namespace Base_Conhecimento_Web.Controllers
             fachada.registrarChamado(cham);
             if (fachada.persistirSolucao(sol) != null)
             {
-                
+
                 List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
                 ChamadoSolucaoViewModel chamadoSolucaoView = new ChamadoSolucaoViewModel();
                 chamadoSolucaoView.chamadoModel = fachada.retornarChamado();
@@ -64,44 +64,21 @@ namespace Base_Conhecimento_Web.Controllers
             return View("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Upload(List<IFormFile> files)
-        {
-            long size = files.Sum(f => f.Length);
-
-            foreach (var formFile in files)
-            {
-                if (formFile.Length > 0)
-                {
-                    var filePath = Path.GetTempFileName();
-
-                    using (var stream = System.IO.File.Create("C:/Users/gus_f/AppData/Local"))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
-                }
-            }
-
-            // Process uploaded files
-            // Don't rely on or trust the FileName property without validation.
-
-            return Ok(new { count = files.Count, size });
-        }
-
-
-
         private void UploadedFile(Solucao model)
         {
-            string uniqueFileName = null;
+            string uniqueFileName;
 
             if (model.arquivos != null)
             {
-                string uploadsFolder = Path.Combine("C:/Users/gus_f/AppData/Local");
-                uniqueFileName = model.solucaoID + "_" + model.arquivos.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                foreach (IFormFile file in model.arquivos)
                 {
-                    model.arquivos.CopyTo(fileStream);
+                    string uploadsFolder = Path.Combine("C:/Users/gus_f/AppData/Local/Base");
+                    uniqueFileName = model.solucaoID + "_" + file.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
                 }
             }
 

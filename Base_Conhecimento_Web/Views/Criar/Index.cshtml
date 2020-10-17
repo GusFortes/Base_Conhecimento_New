@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tiny.cloud/1/zjb6w3k3xzz82wgr316q63um7yvb1xnp47lizxn6phkcvuhm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+
     <script>
         tinymce.init({
             selector: '#textareachamado',
@@ -43,49 +44,69 @@
                 <h3>Insira as informações do chamado e Solução</h3>
             </div>
             <div class="card-body">
-                <form enctype="multipart/form-data" asp-action="Salvar" method="post">
+                <form enctype="multipart/form-data" asp-action="Salvar" method="post" class="needs-validation" novalidate>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="solucaoModel.titulo" class="control-label"></label>
-                                <input asp-for="solucaoModel.titulo" class="form-control" />
+                                <input asp-for="solucaoModel.titulo" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    Por favor, preencha essa campo.
+                                </div>
                                 <span asp-validation-for="solucaoModel.titulo" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="chamadoModel.chamadoID" class="control-label"></label>
-                                <input asp-for="chamadoModel.chamadoID" class="form-control" />
+                                <input asp-for="chamadoModel.chamadoID" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    Por favor, preencha essa campo.
+                                </div>
                                 <span asp-validation-for="chamadoModel.chamadoID" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="chamadoModel.itemCatalogo" class="control-label"></label>
-                                <input asp-for="chamadoModel.itemCatalogo" class="form-control" />
+                                <input asp-for="chamadoModel.itemCatalogo" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    Por favor, preencha essa campo.
+                                </div>
                                 <span asp-validation-for="chamadoModel.itemCatalogo" class="text-danger"></span>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row mx-auto py-4">
-
-                        <div class="form-group">
-                            <label asp-for="chamadoModel.descricao" class="control-label"></label>
-                            <textarea input asp-for="chamadoModel.descricao" class="form-control" id="textareachamado">
-                             
-                            </textarea>
-                            <span asp-validation-for="chamadoModel.descricao" class="text-danger" type="textarea"></span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="solucaoModel.arquivos" class="control-label"></label>
+                                <div class="custom-file">
+                                    <input asp-for="solucaoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <span asp-validation-for="solucaoModel.arquivos" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="chamadoModel.descricao" class="control-label"></label>
+                        <textarea input asp-for="chamadoModel.descricao" class="form-control" id="textareasolucao" required>
+                             </textarea>
+                        <div class="invalid-feedback">
+                            Por favor, preencha essa campo.
+                        </div>
+                        <span asp-validation-for="chamadoModel.descricao" class="text-danger" type="textarea"></span>
+                    </div>
+
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="solucaoModel.arquivos" class="control-label"></label>
                                 <div class="custom-file">
-                                    <input asp-for="solucaoModel.arquivos" class="custom-file-input" id="customFile">
+                                    <input asp-for="solucaoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                                 <span asp-validation-for="solucaoModel.arquivos" class="text-danger"></span>
@@ -93,7 +114,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <!-- Example single danger button -->
+
                         <div class="btn-group">
                             <select class="btn-primary" asp-for="solucaoModel.visualizacao" value="Selecione">
                                 <option value="Quem pode visualizar">Selecione</option>
@@ -102,38 +123,66 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row">
 
-                        <div class="form-group">
-                            <label asp-for="solucaoModel.descricao" class="control-label"></label>
-                            <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareasolucao"></textarea>
-                            <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
+
+                    <div class="form-group">
+                        <label asp-for="solucaoModel.descricao" class="control-label"></label>
+                        <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareachamado" required></textarea>
+                        <div class="invalid-feedback">
+                            Por favor, preencha essa campo.
                         </div>
-
+                        <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
                     </div>
+
+                    <
                     <div class="form-group">
                         <input type="submit" value="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
                         <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
                     </div>
+
+                    @*<form action="processa_imagem_perfil.php" method="post" enctype="multipart/form-data">
+                            <label>Imagem de perfil: <input type="file" name="image[]" multiple="multiple"></label>
+                            <input type="submit" value="Submit">
+                        </form>*@
                 </form>
 
             </div>
         </div>
     </div>
 
+    @section scripts{
+        <script type="text/javascript">
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    }
 
-
+    <script>
+        // Exemplo de JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Pega todos os formulários que nós queremos aplicar estilos de validação Bootstrap personalizados.
+                var forms = document.getElementsByClassName('needs-validation');
+                // Faz um loop neles e evita o envio
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 </body>
 </html>
 
-@*@section scripts{
-    <script type="text/javascript">
-        // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-    </script>*@
 
 
 
@@ -150,58 +199,59 @@
 
 
 
-    @*<head>
 
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+@*<head>
 
-            </head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-        <body>
-            <h3>Criar Solução</h3>
-            <h4 align-center>Preencha os campos abaixo: </h4>
+        </head>
 
-            <div class="col-md-10 mx-auto py-4" class="formulario">
+    <body>
+        <h3>Criar Solução</h3>
+        <h4 align-center>Preencha os campos abaixo: </h4>
 
-                <div class="card">
+        <div class="col-md-10 mx-auto py-4" class="formulario">
 
-                    <div class="card-header bg-primary text-uppercase text-white">
-                        <h4>Descreva o chamado </h4>
-                    </div>
-                    <div class="card-body">
-                        <form enctype="multipart/form-data" asp-action="Avancar">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label asp-for="chamadoID" class="control-label"></label>
-                                        <input asp-for="chamadoID" class="form-control" />
-                                        <span asp-validation-for="chamadoID" class="text-danger"></span>
-                                    </div>
+            <div class="card">
+
+                <div class="card-header bg-primary text-uppercase text-white">
+                    <h4>Descreva o chamado </h4>
+                </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" asp-action="Avancar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="chamadoID" class="control-label"></label>
+                                    <input asp-for="chamadoID" class="form-control" />
+                                    <span asp-validation-for="chamadoID" class="text-danger"></span>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label asp-for="itemCatalogo" class="control-label"></label>
-                                        <input asp-for="itemCatalogo" class="form-control" />
-                                        <span asp-validation-for="itemCatalogo" class="text-danger"></span>
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="itemCatalogo" class="control-label"></label>
+                                    <input asp-for="itemCatalogo" class="form-control" />
                                     <span asp-validation-for="itemCatalogo" class="text-danger"></span>
                                 </div>
+                                <span asp-validation-for="itemCatalogo" class="text-danger"></span>
                             </div>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <label asp-for="descricao" class="control-label"></label>
-                                        <textarea input asp-for="descricao" class="form-control textarea-autosize"> </textarea>
-                                        <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label asp-for="descricao" class="control-label"></label>
+                                    <textarea input asp-for="descricao" class="form-control textarea-autosize"> </textarea>
+                                    <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input asp-action="Avancar" type="submit" value="Próximo" />
-                            </div>
-                            <div class="form-group">
-                                <input asp-action="Index" type="submit" value="Voltar" />
-                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input asp-action="Avancar" type="submit" value="Próximo" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-action="Index" type="submit" value="Voltar" />
+                        </div>
 
-                        </form>
-                    </div>
-        </body>*@
+                    </form>
+                </div>
+    </body>*@

@@ -4,6 +4,22 @@
     ViewData["Title"] = "Alterar Solução";
 
 }
+<html>
+
+<head>
+
+    <script>
+        tinymce.init({
+            selector: '#textareachamado',
+            plugin: 'a_tinymce_plugin',
+            a_plugin_option: true,
+            a_configuration_option: 400
+
+        });
+    </script>
+</head>
+<body>
+
 
 
 
@@ -17,14 +33,19 @@
                 @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <label asp-for="descricao" class="control-label"></label>
+            <textarea input asp-for="descricao" class="form-control" id="textareachamado" required>
                 @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
+            </textarea>
+            <div class="invalid-feedback">
+                Por favor, preencha essa campo.
             </div>
-
+            <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             Visualização
             <select asp-for="visualizacao" value="Selecione">
@@ -46,8 +67,11 @@
                 <input asp-action="Salvar" type="submit" value="Salvar" />
                 <input asp-action="Index" type="submit" value="Voltar" />
             </div>
-</form>
+        </div>
+    </form>
 
-<div class="form-group">
-    <input asp-action="Index" type="submit" value="Voltar" />
-</div>
+    <div class="form-group">
+        <input asp-action="Index" type="submit" value="Voltar" />
+    </div>
+</body>
+</html>

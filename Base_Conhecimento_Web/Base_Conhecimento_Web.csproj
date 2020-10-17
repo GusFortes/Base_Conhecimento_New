@@ -17,4 +17,12 @@
     <ProjectReference Include="..\Base_Conhecimento\Base_Conhecimento.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Criar\estilos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\estilo.css" />
+  </ItemGroup>
+
 </Project>
