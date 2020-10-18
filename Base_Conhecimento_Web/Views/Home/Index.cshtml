@@ -15,14 +15,8 @@
 
     <div class="text-center">
         <h1 class="display-4">Base de Conhecimento</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <p>Encontre a solução do seu problema aqui!</p>
     </div>
-    @foreach (var item in Model)
-    {
-        <a href="~/Base/13_Anotação 2019-05-15 221049.png" download="13_Anotação 2019-05-15 221049.png">clique</a>
-
-        @Html.ActionLink("Delete", "Delete", new { delete = item.arquivos }, new { @class = "label label-warning" })
-    }
 
     <div class="container" id="solucao">
         <section id="content">

@@ -17,6 +17,10 @@ namespace Base_Conhecimento.Controllers
         {
             List<Solucao> solucoes = fachada.consultaTodasSolucoes();
             List<Chamado> chamados = fachada.consultaTodosChamados();
+            List <ChamadoUserViewModel> usuariochamados = new List<ChamadoUserViewModel>();
+            ChamadoUserViewModel chamadoUser = new ChamadoUserViewModel();
+            
+
             return View(chamados);
         }
 
@@ -43,21 +47,21 @@ namespace Base_Conhecimento.Controllers
             return View("Solucao", cs);
         }
 
-        public IActionResult Delete(IFormFile file)
+        public IActionResult Delete(String file)
         {
-            DeleteFile(file);
+            //DeleteFile(file);
             return RedirectToAction("Index", "Home");
 
         }
 
-        private void DeleteFile(IFormFile file)
+        private void DeleteFile(String file)
         {
-            string nomearquivo = file.FileName;
-            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/", nomearquivo);
-            if (System.IO.File.Exists(arquivo))
-            {
-                System.IO.File.Delete(arquivo);
-            }
+           // string nomearquivo = file.FileName;
+            //var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/", nomearquivo);
+            //if (System.IO.File.Exists(arquivo))
+            //{
+            //    System.IO.File.Delete(arquivo);
+            //}
         }
     }
 }

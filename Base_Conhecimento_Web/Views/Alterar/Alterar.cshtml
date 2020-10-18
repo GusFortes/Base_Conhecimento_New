@@ -52,11 +52,11 @@
         @if (Model.chamadoModel.nomeArquivos != null)
         {
     <ul>
-        @foreach (var anexo in Model.chamadoModel.nomeArquivos)
+        @foreach (String anexo in Model.chamadoModel.nomeArquivos)
         {
-            <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+        <a href="~/Base/Chamado/@Html.Raw(anexo)" Download="@Html.Raw(anexo)">@Html.Raw(anexo)</a>
 
-            @Html.ActionLink("Delete", "Delete","Alterar", new {nomeArquivo = anexo}, null )
+            @Html.ActionLink("Delete", "Delete", new { nome = @Html.Raw(anexo)}, new { @class = "label label-warning" } )
         }
     </ul>
         }

@@ -32,11 +32,8 @@ namespace Base_Conhecimento
         [Display(Name = "Data de Atualização")]
         public DateTime dataAtualizacao { get; set; }
 
-
         public String visualizacao { get; set; }
-
         public String status { get; set; }
-
 
         public String nomeArquivo { get; set; }
 

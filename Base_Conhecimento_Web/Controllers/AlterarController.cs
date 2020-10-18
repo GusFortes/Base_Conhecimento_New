@@ -15,6 +15,7 @@ namespace Base_Conhecimento_Web.Controllers
         private FachadaBase fachada = FachadaBase.getInstance();
         public static int id = 0;
 
+
         public IActionResult Index()
         {
             Usuario user = fachada.Login(id);
@@ -53,7 +54,7 @@ namespace Base_Conhecimento_Web.Controllers
             ChamadoSolucaoViewModel solucaoChamado = new ChamadoSolucaoViewModel();
 
             solucaoChamado.solucaoModel = fachada.consultaSolucaoId(id);
-            solucaoChamado.chamadoModel = fachada.consultaChamadoId(id);
+            solucaoChamado.chamadoModel = fachada.consultaChamadoporId(id);
             List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
             cs.Add(solucaoChamado);
 
@@ -65,12 +66,10 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Salvar(ChamadoSolucaoViewModel chamadoSolucao)
         {
-
             if (fachada.alterarSolucao(chamadoSolucao.solucaoModel) && fachada.alterarChamado(chamadoSolucao.chamadoModel))
             {
                 List<ChamadoSolucaoViewModel> solucaoAlterada = new List<ChamadoSolucaoViewModel>();
                 solucaoAlterada.Add(chamadoSolucao);
-
                 return View("SolucaoAlterada", solucaoAlterada);
             }
             else
@@ -79,17 +78,24 @@ namespace Base_Conhecimento_Web.Controllers
             }
         }
 
-        //[HttpPost]
-        [Route("delete/{nomeArquivo?}/{sort}")]
-        async Task<ActionResult> Delete(String? nomeArquivo)
+        //[Route("Delete/{nome}/{sort}")]
+        public ActionResult Delete(String nome)
         {
 
-            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/");
+            if (nome == null) { }
+
+            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado/" + nome);
+
+
+            ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
             if (System.IO.File.Exists(arquivo))
             {
+                chamadoSolucao = fachada.ExluirArquivo(nome);
                 System.IO.File.Delete(arquivo);
+
             }
-            return RedirectToAction("Alterar", "Alterar");
+
+            return View("Alterar", chamadoSolucao.chamadoModel.solucaoID);
         }
 
 

@@ -13,6 +13,7 @@ namespace Base_Conhecimento
         public static FachadaBase fachada;
         private Chamado chamadoaux;
         public static Usuario usuarioLogado;
+        public int idSolucao;
 
         public List<Solucao> consultaTodasSolucoes()
         {
@@ -53,9 +54,10 @@ namespace Base_Conhecimento
             return solucaoDao.consultaChamadoId(id);
         }
 
-        public Chamado consultaChamadoId(int id)
+        public Chamado consultaChamadoporId(int id)
         {
-            return solucaoDao.consultaChamadoId(id);
+            idSolucao = id;
+            return solucaoDao.consultaChamadoporId(id);
         }
 
         public List<Solucao> consultaSolucoes(String problema)
@@ -70,6 +72,8 @@ namespace Base_Conhecimento
 
         public bool alterarChamado(Chamado chamadoModel)
         {
+
+            chamadoModel.solucaoID = idSolucao;
             return solucaoDao.alterarChamado(chamadoModel);
         }
 
@@ -83,12 +87,23 @@ namespace Base_Conhecimento
 
         public bool alterarSolucao(Solucao sol)
         {
-            // this.solucaoaux.solucaoID = this.id;
+            sol.solucaoID = idSolucao;
             this.solucaoaux.titulo = sol.titulo;
             this.solucaoaux.descricao = sol.descricao;
             this.solucaoaux.usuarioID = usuarioLogado.usuarioID;
 
             return solucaoDao.alterarSolucao(solucaoaux);
+        }
+
+        public ChamadoSolucaoViewModel ExluirArquivo(string nome)
+        {
+            ChamadoSolucaoViewModel cs = new ChamadoSolucaoViewModel();
+            Chamado cham = solucaoDao.ExcluirArquivo(nome);
+            Solucao sol = solucaoDao.consultaSolucaoId(cham.solucaoID);
+            cs.chamadoModel = cham;
+            cs.solucaoModel = sol;
+
+            return cs;
         }
 
         public Usuario Login(int id)

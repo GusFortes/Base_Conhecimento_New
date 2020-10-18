@@ -90,6 +90,31 @@ namespace Base_Conhecimento.DAO
             }
 
         }
+
+        public Chamado ExcluirArquivo(string nome)
+        {
+            Chamado chamado = new Chamado();
+            List<String> arquivonome = new List<String>();
+            foreach (String nomeArquivo in nome.Split("_"))
+            {
+                arquivonome.Add(nomeArquivo);
+
+            }
+            int id = Int32.Parse(arquivonome.First());
+            String arquivo = "/" + arquivonome.Last();
+            var c = from s in db.Chamado
+                    where s.solucaoID == id
+                    select s;
+
+            foreach (Chamado cham in c)
+            {
+                cham.nomeArquivos.Remove(arquivo);
+                chamado = cham;
+            }
+            db.SaveChanges();
+            return chamado;
+        }
+
         public Chamado persistirChamado(Chamado chamado)
         {
             try
@@ -175,10 +200,25 @@ namespace Base_Conhecimento.DAO
             {
                 chamado = cham;
             }
+            if (chamado.nomeArquivo != "" && chamado.nomeArquivo != null)
+            {
+                List<String> arquivoNome = new List<string>();
+                foreach (String nome in chamado.nomeArquivo.Split("/"))
+                {
+                    if (nome == "") { }
+                    else
+                    {
+                        arquivoNome.Add(chamado.solucaoID + "_" + nome);
+                    }
+                }
+                chamado.nomeArquivos = arquivoNome;
+            }
+
+
             return chamado;
         }
 
-        public Chamado consultaChamadoId(int id)
+        public Chamado consultaChamadoporId(int id)
         {
             Chamado chamado = new Chamado();
 
@@ -205,9 +245,7 @@ namespace Base_Conhecimento.DAO
                 chamado.nomeArquivos = arquivoNome;
             }
             return chamado;
-
         }
-
 
         public List<Solucao> consultaTodasSolucoes()
         {
@@ -250,6 +288,19 @@ namespace Base_Conhecimento.DAO
                 solucaoencontrada = sol;
             }
 
+            if (solucaoencontrada.nomeArquivo != "" && solucaoencontrada.nomeArquivo != null)
+            {
+                List<String> arquivoNome = new List<string>();
+                foreach (String nome in solucaoencontrada.nomeArquivo.Split("/"))
+                {
+                    if (nome == "") { }
+                    else
+                    {
+                        arquivoNome.Add(solucaoencontrada.solucaoID + "_" + nome);
+                    }
+                }
+                solucaoencontrada.nomeArquivos = arquivoNome;
+            }
             return solucaoencontrada;
         }
 
