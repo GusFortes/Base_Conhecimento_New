@@ -1,4 +1,4 @@
-﻿@model Base_Conhecimento.Solucao
+﻿@model Base_Conhecimento.ChamadoSolucaoViewModel
 
 @{
     ViewData["Title"] = "Alterar Solução";
@@ -17,6 +17,15 @@
 
         });
     </script>
+    <script>
+        tinymce.init({
+            selector: '#textareasolucao',
+            plugin: 'a_tinymce_plugin',
+            a_plugin_option: true,
+            a_configuration_option: 400
+
+        });
+    </script>
 </head>
 <body>
 
@@ -27,28 +36,44 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.solucaoModel.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.solucaoModel.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.solucaoModel.titulo, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="descricao" class="control-label"></label>
-            <textarea input asp-for="descricao" class="form-control" id="textareachamado" required>
-                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
-            </textarea>
-            <div class="invalid-feedback">
-                Por favor, preencha essa campo.
+            @Html.LabelFor(model => model.chamadoModel.itemCatalogo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.chamadoModel.itemCatalogo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.chamadoModel.itemCatalogo, "", new { @class = "text-danger" })
             </div>
-            <span asp-validation-for="descricao" class="text-danger" type="textarea"></span>
         </div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.chamadoModel.nomeArquivos != null)
+        {
+    <ul>
+        @foreach (var anexo in Model.chamadoModel.nomeArquivos)
+        {
+            <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+
+            @Html.ActionLink("Delete", "Delete","Alterar", new {nomeArquivo = anexo}, null )
+        }
+    </ul>
+        }
+
+
+        <div class="form-group">
+            <label asp-for="chamadoModel.descricao" class="control-label"></label>
+            <textarea input asp-for="chamadoModel.descricao" class="form-control" id="textareachamado" required>
+                @Html.EditorFor(model => model.chamadoModel.descricao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.chamadoModel.descricao, "", new { @class = "text-danger" })
+            </textarea>
+        </div>
+
         <div class="form-group">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            Visualização
-            <select asp-for="visualizacao" value="Selecione">
+            Quem pode ver essa solução?
+            <select asp-for="solucaoModel.visualizacao" value="Selecione">
                 <option value="Selecione">Selecione</option>
                 <option value="Analista">Analista</option>
                 <option value="Cliente">Cliente</option>
@@ -56,12 +81,26 @@
             <br>
             <br>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            Status
-            <select asp-for="status" value="Selecione">
+            Status da Solução
+            <select asp-for="solucaoModel.status" value="Selecione">
                 <option value="Selecione">Selecione</option>
                 <option value="Ativo">Ativo</option>
                 <option value="Desativado">Desativado</option>
             </select>
+
+
+            <div class="form-group">
+                <label asp-for="solucaoModel.descricao" class="control-label"></label>
+                <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareasolucao" required>
+                @Html.EditorFor(model => model.solucaoModel.descricao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.solucaoModel.descricao, "", new { @class = "text-danger" })
+            </textarea>
+                <div class="invalid-feedback">
+                    Por favor, preencha essa campo.
+                </div>
+                <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
                 <input asp-action="Salvar" type="submit" value="Salvar" />
@@ -70,8 +109,10 @@
         </div>
     </form>
 
-    <div class="form-group">
-        <input asp-action="Index" type="submit" value="Voltar" />
-    </div>
+
+
+    @*<div class="form-group">
+            <input asp-action="Index" type="submit" value="Voltar" />
+        </div>*@
 </body>
 </html>

@@ -40,15 +40,14 @@ namespace Base_Conhecimento_Web.Controllers
             Solucao sol = chamadoSolucao.solucaoModel;
             Chamado cham = chamadoSolucao.chamadoModel;
             fachada.registrarChamado(cham);
-            if (fachada.persistirSolucao(sol) != null)
+            ChamadoSolucaoViewModel chamadoSolucaoView = fachada.persistirInformacoes(sol, cham);
+           
+            if (chamadoSolucaoView.solucaoModel != null && chamadoSolucaoView.chamadoModel != null)
             {
-
                 List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
-                ChamadoSolucaoViewModel chamadoSolucaoView = new ChamadoSolucaoViewModel();
-                chamadoSolucaoView.chamadoModel = fachada.retornarChamado();
-                chamadoSolucaoView.solucaoModel = sol;
                 cs.Add(chamadoSolucao);
-                UploadedFile(sol);
+                UploadedFileSolucao(chamadoSolucaoView.solucaoModel);
+                UploadedFileChamado(chamadoSolucaoView.chamadoModel);
                 return View("Salvar", cs);
             }
             else
@@ -64,7 +63,7 @@ namespace Base_Conhecimento_Web.Controllers
             return View("Index");
         }
 
-        private void UploadedFile(Solucao model)
+        private void UploadedFileSolucao(Solucao model)
         {
             string uniqueFileName;
 
@@ -72,17 +71,51 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 foreach (IFormFile file in model.arquivos)
                 {
-                    string uploadsFolder = Path.Combine("C:/Users/gus_f/AppData/Local/Base");
+                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/");
                     uniqueFileName = model.solucaoID + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
+                    // File arquivo = (File)file;
                 }
             }
 
         }
+
+        private void UploadedFileChamado(Chamado model)
+        {
+            string uniqueFileName;
+
+            if (model.arquivos != null)
+            {
+                foreach (IFormFile file in model.arquivos)
+                {
+                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado");
+                    uniqueFileName = model.solucaoID + "_" + file.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    // File arquivo = (File)file;
+                }
+            }
+
+        }
+
+        private void DeleteFile(IFormFile file)
+        {
+            string nomearquivo = file.FileName;
+            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/", nomearquivo);
+            if (System.IO.File.Exists(arquivo))
+            {
+                System.IO.File.Delete(arquivo);
+            }
+
+        }
     }
+
 }
 

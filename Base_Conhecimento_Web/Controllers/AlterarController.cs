@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,22 +50,26 @@ namespace Base_Conhecimento_Web.Controllers
         public IActionResult Alterar(int id)
         {
 
-            Solucao sol = new Solucao();
-            sol = fachada.consultaSolucaoId(id);
+            ChamadoSolucaoViewModel solucaoChamado = new ChamadoSolucaoViewModel();
 
-            return View("Alterar", sol);
+            solucaoChamado.solucaoModel = fachada.consultaSolucaoId(id);
+            solucaoChamado.chamadoModel = fachada.consultaChamadoId(id);
+            List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
+            cs.Add(solucaoChamado);
+
+            return View("Alterar", solucaoChamado);
 
 
         }
 
         [HttpPost]
-        public IActionResult Salvar(Solucao sol)
+        public IActionResult Salvar(ChamadoSolucaoViewModel chamadoSolucao)
         {
 
-            if (fachada.alterarSolucao(sol))
+            if (fachada.alterarSolucao(chamadoSolucao.solucaoModel) && fachada.alterarChamado(chamadoSolucao.chamadoModel))
             {
-                List<Solucao> solucaoAlterada = new List<Solucao>();
-                solucaoAlterada.Add(sol);
+                List<ChamadoSolucaoViewModel> solucaoAlterada = new List<ChamadoSolucaoViewModel>();
+                solucaoAlterada.Add(chamadoSolucao);
 
                 return View("SolucaoAlterada", solucaoAlterada);
             }
@@ -73,6 +78,20 @@ namespace Base_Conhecimento_Web.Controllers
                 return View("SemResultado");
             }
         }
+
+        //[HttpPost]
+        [Route("delete/{nomeArquivo?}/{sort}")]
+        async Task<ActionResult> Delete(String? nomeArquivo)
+        {
+
+            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/");
+            if (System.IO.File.Exists(arquivo))
+            {
+                System.IO.File.Delete(arquivo);
+            }
+            return RedirectToAction("Alterar", "Alterar");
+        }
+
 
     }
 }

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Criar\estilos\" />
+    <Folder Include="wwwroot\Base\Chamado\" />
   </ItemGroup>
 
   <ItemGroup>

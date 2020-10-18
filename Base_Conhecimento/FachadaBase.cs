@@ -28,13 +28,13 @@ namespace Base_Conhecimento
         {
             this.chamadoaux = cham;
         }
-        public Solucao persistirSolucao(Solucao sol)
+        public ChamadoSolucaoViewModel persistirInformacoes(Solucao sol, Chamado cham)
         {
             chamadoaux.solucaoID = sol.solucaoID;
             sol.dataAtualizacao = DateTime.Now;
             sol.usuarioID = usuarioLogado.usuarioID;
             chamadoaux.usuarioID = usuarioLogado.usuarioID;
-            return solucaoDao.persistirSolucao(sol, chamadoaux);
+            return solucaoDao.persistirInformacoes(sol, cham);
         }
 
         public static FachadaBase getInstance()
@@ -53,6 +53,11 @@ namespace Base_Conhecimento
             return solucaoDao.consultaChamadoId(id);
         }
 
+        public Chamado consultaChamadoId(int id)
+        {
+            return solucaoDao.consultaChamadoId(id);
+        }
+
         public List<Solucao> consultaSolucoes(String problema)
         {
             return solucaoDao.consultaSolucoes(problema, usuarioLogado);
@@ -61,6 +66,11 @@ namespace Base_Conhecimento
         public Chamado retornarChamado()
         {
             return chamadoaux;
+        }
+
+        public bool alterarChamado(Chamado chamadoModel)
+        {
+            return solucaoDao.alterarChamado(chamadoModel);
         }
 
         public Solucao consultaSolucaoId(int id)

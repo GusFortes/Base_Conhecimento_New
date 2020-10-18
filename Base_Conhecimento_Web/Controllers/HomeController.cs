@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Base_Conhecimento.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Base_Conhecimento.Controllers
 {
@@ -35,11 +37,27 @@ namespace Base_Conhecimento.Controllers
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
             chamadoSolucao.chamadoModel = fachada.consultaChamadoId(id);
             chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(chamadoSolucao.chamadoModel.solucaoID);
-            
+
             cs.Add(chamadoSolucao);
-            
 
             return View("Solucao", cs);
+        }
+
+        public IActionResult Delete(IFormFile file)
+        {
+            DeleteFile(file);
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        private void DeleteFile(IFormFile file)
+        {
+            string nomearquivo = file.FileName;
+            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/", nomearquivo);
+            if (System.IO.File.Exists(arquivo))
+            {
+                System.IO.File.Delete(arquivo);
+            }
         }
     }
 }

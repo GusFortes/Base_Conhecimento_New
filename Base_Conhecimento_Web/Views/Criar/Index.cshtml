@@ -79,12 +79,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="solucaoModel.arquivos" class="control-label"></label>
+                                <label asp-for="chamadoModel.arquivos" class="control-label"></label>
                                 <div class="custom-file">
-                                    <input asp-for="solucaoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">
+                                    <input asp-for="chamadoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
-                                <span asp-validation-for="solucaoModel.arquivos" class="text-danger"></span>
+                                <span asp-validation-for="chamadoModel.arquivos" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="row">
 
-                        <div class="btn-group">
+                        <div class="btn-group"> Quem pode visualizar essa Solução?
                             <select class="btn-primary" asp-for="solucaoModel.visualizacao" value="Selecione">
                                 <option value="Quem pode visualizar">Selecione</option>
                                 <option value="Analista">Analista</option>
@@ -134,7 +134,7 @@
                         <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
                     </div>
 
-                    <
+                    
                     <div class="form-group">
                         <input type="submit" value="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
                         <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>

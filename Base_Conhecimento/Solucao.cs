@@ -23,7 +23,7 @@ namespace Base_Conhecimento
 
         public int usuarioID { get; set; }
 
-        
+
         [AllowHtml]
         [Display(Name = "Descrição")]
         public String descricao { get; set; }
@@ -40,15 +40,16 @@ namespace Base_Conhecimento
 
         public String nomeArquivo { get; set; }
 
-
-
         [NotMapped]
         public List<IFormFile> arquivos { get; set; }
+
+        [NotMapped]
+        public List<String> nomeArquivos { get; set; }
 
 
         public Solucao persistirSolucao(Solucao solucao, Chamado chamado)
         {
-            return solucaoDao.persistirSolucao(solucao, chamado);
+            return solucaoDao.persistirSolucao(solucao);
         }
 
         public bool alterarSolucao(Solucao solucao)

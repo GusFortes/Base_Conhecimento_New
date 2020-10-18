@@ -21,6 +21,14 @@
 
         @foreach (var item in Model)
         {
+            <div id="anexos">
+                Anexos<br>
+                @foreach (var anexo in item.chamadoModel.nomeArquivos)
+                {
+                    <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                }
+            </div>
+
             <p>@Html.Raw(item.chamadoModel.descricao)</p>
         }
     </div>
@@ -32,7 +40,12 @@
                 Data atualização
                 @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
             </div>
-
+            <div id="anexos"> Anexos<br>
+                @foreach (var anexo in item.solucaoModel.nomeArquivos)
+                {
+                    <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                }
+            </div>
             <div class="container">
 
                 @Html.Raw(item.solucaoModel.descricao)

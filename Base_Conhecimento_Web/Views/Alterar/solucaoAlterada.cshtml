@@ -1,48 +1,68 @@
-﻿@model IEnumerable<Base_Conhecimento.Solucao>
+﻿@model IEnumerable<Base_Conhecimento.ChamadoSolucaoViewModel>
+
 
 @{
-    ViewData["Title"] = "Solução Encontrada";
+    ViewData["Title"] = "Solução Salva";
 
 }
+<!DOCTYPE html>
 
-<h1>Solução Alterada:</h1>
+<html lang="pt-br">
 
-<table class="table" align="center">
-    <thead>
-        <tr>
-            <form>
-                <th>
-                    @Html.DisplayNameFor(model => model.titulo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.descricao)
-                </th>
-                <th>
-                </th>
-            </form>
-        </tr>
-    </thead>
-    <form>
-        <div class="form-group">
-            <tbody>
-                @foreach (var item in Model)
+<head>
+    <link href="~/css/criar.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container" id="chamado">
+        <h2> @Html.DisplayNameFor(model => model.chamadoModel.descricao)</h2>
+
+
+        @foreach (var item in Model)
+        {
+            <div id="anexos">
+                Anexos<br>
+                @if (item.chamadoModel.nomeArquivos != null)
                 {
-                    <tr>
+                    @foreach (var anexo in item.chamadoModel.nomeArquivos)
+                    {
+                        <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                    }}
+            </div>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.titulo)
-                        </td>
-                        <th>
-
-                            @Html.Raw(item.descricao)
-                        </th>
-                    </tr>
-
+            <p>@Html.Raw(item.chamadoModel.descricao)</p>
+        }
+    </div>
+    <div class="container" id="solucao">
+        @foreach (var item in Model)
+        {
+            <h2> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h2>
+            <div class="row">
+                Data atualização
+                @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
+            </div>
+            <div id="anexos">
+                Anexos<br>
+                @if (item.chamadoModel.nomeArquivos != null)
+                {
+                    @foreach (var anexo in item.solucaoModel.nomeArquivos)
+                    {
+                        <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                    }
                 }
-            </tbody>
+            </div>
+            <div class="container">
+
+                @Html.Raw(item.solucaoModel.descricao)
+
+            </div>
+
+        }
+        <div class="form-group">
+            <input asp-action="Index" type="submit" value="Voltar" />
         </div>
-    </form>
-</table>
-<div class="form-group">
-    <input asp-action="Index" type="submit" value="Voltar" />
-</div>
+    </div>
+
+</body>
+</html>
