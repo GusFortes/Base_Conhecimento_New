@@ -31,85 +31,121 @@
 
 
 
-
-    <form asp-action="Alterar">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.solucaoModel.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.solucaoModel.titulo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.solucaoModel.titulo, "", new { @class = "text-danger" })
+    <div class="mx-auto py-4">
+        <div class="card">
+            <div class="card-header bg-primary text-uppercase text-white">
+                <h3>Insira as informações do chamado e Solução</h3>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.chamadoModel.itemCatalogo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.chamadoModel.itemCatalogo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.chamadoModel.itemCatalogo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @if (Model.chamadoModel.nomeArquivos != null)
-        {
-    <ul>
-        @foreach (String anexo in Model.chamadoModel.nomeArquivos)
-        {
-        <a href="~/Base/Chamado/@Html.Raw(anexo)" Download="@Html.Raw(anexo)">@Html.Raw(anexo)</a>
+            <div class="card-body">
+                <form enctype="multipart/form-data" asp-action="Salvar" method="post" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            @Html.ActionLink("Delete", "Delete", new { nome = @Html.Raw(anexo)}, new { @class = "label label-warning" } )
-        }
-    </ul>
-        }
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.solucaoModel.titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.solucaoModel.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.solucaoModel.titulo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.chamadoModel.itemCatalogo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.chamadoModel.itemCatalogo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.chamadoModel.itemCatalogo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @if (Model.chamadoModel.nomeArquivos != null)
+                    {
+                        <ul>
+                            @foreach (String anexo in Model.chamadoModel.nomeArquivos)
+                            {
+                                <a href="~/Base/Chamado/@Html.Raw(anexo)" Download="@Html.Raw(anexo)">@Html.Raw(anexo)</a>
 
+                                @Html.ActionLink("Delete", "Delete", new { nome = @Html.Raw(anexo) }, new { @class = "label label-warning" })
+                            }
+                        </ul>
+                    }
 
-        <div class="form-group">
-            <label asp-for="chamadoModel.descricao" class="control-label"></label>
-            <textarea input asp-for="chamadoModel.descricao" class="form-control" id="textareachamado" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="chamadoModel.arquivos" class="control-label"></label>
+                                <div class="custom-file">
+                                    <input asp-for="chamadoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                                <span asp-validation-for="chamadoModel.arquivos" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="chamadoModel.descricao" class="control-label"></label>
+                        <textarea input asp-for="chamadoModel.descricao" class="form-control" id="textareachamado" required>
                 @Html.EditorFor(model => model.chamadoModel.descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.chamadoModel.descricao, "", new { @class = "text-danger" })
             </textarea>
-        </div>
+                    </div>
 
-        <div class="form-group">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            Quem pode ver essa solução?
-            <select asp-for="solucaoModel.visualizacao" value="Selecione">
-                <option value="Selecione">Selecione</option>
-                <option value="Analista">Analista</option>
-                <option value="Cliente">Cliente</option>
-            </select>
-            <br>
-            <br>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            Status da Solução
-            <select asp-for="solucaoModel.status" value="Selecione">
-                <option value="Selecione">Selecione</option>
-                <option value="Ativo">Ativo</option>
-                <option value="Desativado">Desativado</option>
-            </select>
+                    <div class="form-group">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        Quem pode ver essa solução?
+                        <select asp-for="solucaoModel.visualizacao" value="Selecione">
+                            <option value="Selecione">Selecione</option>
+                            <option value="Analista">Analista</option>
+                            <option value="Cliente">Cliente</option>
+                        </select>
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="solucaoModel.arquivos" class="control-label"></label>
+                                    <div class="custom-file">
+                                        <input asp-for="solucaoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">>
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                    <span asp-validation-for="solucaoModel.arquivos" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        Status da Solução
+                        <select asp-for="solucaoModel.status" value="Selecione">
+                            <option value="Selecione">Selecione</option>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Desativado">Desativado</option>
+                        </select>
 
 
-            <div class="form-group">
-                <label asp-for="solucaoModel.descricao" class="control-label"></label>
-                <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareasolucao" required>
+                        <div class="form-group">
+                            <label asp-for="solucaoModel.descricao" class="control-label"></label>
+                            <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareasolucao" required>
                 @Html.EditorFor(model => model.solucaoModel.descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.solucaoModel.descricao, "", new { @class = "text-danger" })
             </textarea>
-                <div class="invalid-feedback">
-                    Por favor, preencha essa campo.
-                </div>
-                <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
-            </div>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="invalid-feedback">
+                                Por favor, preencha essa campo.
+                            </div>
+                            <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
+                        </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <input asp-action="Salvar" type="submit" value="Salvar" />
-                <input asp-action="Index" type="submit" value="Voltar" />
+                        <div class="form-group">
+                            <input type="submit" value="Salvar" asp-action="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                            <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
-    </form>
-
-
+    </div>
 
     @*<div class="form-group">
             <input asp-action="Index" type="submit" value="Voltar" />

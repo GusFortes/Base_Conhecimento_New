@@ -101,14 +101,30 @@ namespace Base_Conhecimento.DAO
 
             }
             int id = Int32.Parse(arquivonome.First());
-            String arquivo = "/" + arquivonome.Last();
+            String arquivo = arquivonome.Last();
             var c = from s in db.Chamado
                     where s.solucaoID == id
                     select s;
 
+            List<String> listaDeNomes = new List<String>();
+
             foreach (Chamado cham in c)
             {
-                cham.nomeArquivos.Remove(arquivo);
+                foreach (String nomeArquivo in cham.nomeArquivo.Split("/"))
+                {
+
+                    listaDeNomes.Add(nomeArquivo);
+                }
+
+                listaDeNomes.Remove(arquivo);
+
+                if (listaDeNomes.Count() > 1)
+                {
+                    foreach (String nomeArq in listaDeNomes)
+                    {
+                        cham.nomeArquivo = "/" + nomeArq;
+                    }
+                }
                 chamado = cham;
             }
             db.SaveChanges();
@@ -304,43 +320,123 @@ namespace Base_Conhecimento.DAO
             return solucaoencontrada;
         }
 
-        public bool alterarSolucao(Solucao solucao)
+        public Solucao alterarSolucao(Solucao solucao)
         {
+
             var solucoes = from s in db.Solucao
                            where s.solucaoID == solucao.solucaoID
                            select s;
             try
             {
-                foreach (Solucao s in solucoes)
+                if (solucao.arquivos == null)
                 {
-                    s.titulo = solucao.titulo;
-                    s.descricao = solucao.descricao;
-                    s.visualizacao = solucao.visualizacao;
-                    s.status = solucao.status;
+                    {
+                        foreach (Solucao s in solucoes)
+                        {
+                            s.titulo = solucao.titulo;
+                            s.descricao = solucao.descricao;
+                            s.visualizacao = solucao.visualizacao;
+                            s.status = solucao.status;
+                            s.usuarioID = solucao.usuarioID;
+                            s.dataAtualizacao = DateTime.Now;
+                        }
+                    }
+                }
+                else
+                {
+                    String nomeDosArquivos = "";
+                    foreach (var nomeAquivoSolucao in solucao.arquivos)
+                    {
+                        nomeDosArquivos = nomeDosArquivos + "/" + nomeAquivoSolucao.FileName;
+                    }
+
+                    foreach (Solucao s in solucoes)
+                    {
+                        s.titulo = solucao.titulo;
+                        s.descricao = solucao.descricao;
+                        s.visualizacao = solucao.visualizacao;
+                        s.status = solucao.status;
+                        s.usuarioID = solucao.usuarioID;
+                        s.nomeArquivo = s.nomeArquivo + nomeDosArquivos;
+                        s.dataAtualizacao = DateTime.Now;
+                        nomeDosArquivos = s.nomeArquivo;
+                    }
+
+                    if (nomeDosArquivos != "")
+                    {
+                        List<String> arquivonome = new List<String>();
+                        foreach (String nomeArquivo in nomeDosArquivos.Split("/"))
+                        {
+                            if (nomeArquivo == "") { }
+                            else
+                            {
+                                arquivonome.Add(solucao.solucaoID + "_" + nomeArquivo);
+                            }
+                        }
+                        solucao.nomeArquivos = arquivonome;
+                    }
+
                 }
                 db.SaveChanges();
+                return solucao;
             }
             catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
-            return true;
         }
 
-        public bool alterarChamado(Chamado chamado)
+        public Chamado alterarChamado(Chamado chamado)
         {
             var chamados = from c in db.Chamado
                            where c.solucaoID == chamado.solucaoID
                            select c;
-            try
+            //try
+            //{
+            if (chamado.arquivos == null)
             {
+
                 foreach (Chamado c in chamados)
                 {
                     c.descricao = chamado.descricao;
                     c.itemCatalogo = chamado.itemCatalogo;
 
                 }
-                db.SaveChanges();
+
             }
-            catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
-            return true;
+            else
+            {
+                String nomeDosArquivos = "";
+                foreach (var nomeAquivoChamado in chamado.arquivos)
+                {
+                    nomeDosArquivos = nomeDosArquivos + "/" + nomeAquivoChamado.FileName;
+                }
+                foreach (Chamado c in chamados)
+                {
+                    c.descricao = chamado.descricao;
+                    c.itemCatalogo = chamado.itemCatalogo;
+                    c.nomeArquivo = c.nomeArquivo + nomeDosArquivos;
+                    c.usuarioID = chamado.usuarioID;
+                    nomeDosArquivos = c.nomeArquivo;
+                }
+
+                if (nomeDosArquivos != "")
+                {
+                    List<String> arquivonome = new List<String>();
+                    foreach (String nomeArquivo in nomeDosArquivos.Split("/"))
+                    {
+                        if (nomeArquivo == "") { }
+                        else
+                        {
+                            arquivonome.Add(chamado.solucaoID + "_" + nomeArquivo);
+                        }
+                    }
+                    chamado.nomeArquivos = arquivonome;
+                }
+            }
+
+            db.SaveChanges();
+            return chamado;
+            //}
+            //catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
+
         }
 
 

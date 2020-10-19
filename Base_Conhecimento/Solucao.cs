@@ -49,7 +49,7 @@ namespace Base_Conhecimento
             return solucaoDao.persistirSolucao(solucao);
         }
 
-        public bool alterarSolucao(Solucao solucao)
+        public Solucao alterarSolucao(Solucao solucao)
         {
             return solucaoDao.alterarSolucao(solucao);
         }

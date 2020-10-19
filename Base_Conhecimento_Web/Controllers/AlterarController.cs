@@ -66,10 +66,18 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Salvar(ChamadoSolucaoViewModel chamadoSolucao)
         {
-            if (fachada.alterarSolucao(chamadoSolucao.solucaoModel) && fachada.alterarChamado(chamadoSolucao.chamadoModel))
+            Chamado cham = fachada.alterarChamado(chamadoSolucao.chamadoModel);
+            Solucao sol = fachada.alterarSolucao(chamadoSolucao.solucaoModel);
+
+
+            if ( cham!=null && sol!=null )
             {
+                chamadoSolucao.chamadoModel = cham;
+                chamadoSolucao.solucaoModel = sol;
                 List<ChamadoSolucaoViewModel> solucaoAlterada = new List<ChamadoSolucaoViewModel>();
                 solucaoAlterada.Add(chamadoSolucao);
+                UploadedFileSolucao(chamadoSolucao.solucaoModel);
+                UploadedFileChamado(chamadoSolucao.chamadoModel);
                 return View("SolucaoAlterada", solucaoAlterada);
             }
             else
@@ -78,7 +86,6 @@ namespace Base_Conhecimento_Web.Controllers
             }
         }
 
-        //[Route("Delete/{nome}/{sort}")]
         public ActionResult Delete(String nome)
         {
 
@@ -86,17 +93,71 @@ namespace Base_Conhecimento_Web.Controllers
 
             var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado/" + nome);
 
-
+            int id = 0;
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
+            List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
+
             if (System.IO.File.Exists(arquivo))
             {
                 chamadoSolucao = fachada.ExluirArquivo(nome);
+                cs.Add(chamadoSolucao);
                 System.IO.File.Delete(arquivo);
 
+                id = chamadoSolucao.chamadoModel.solucaoID;
             }
 
-            return View("Alterar", chamadoSolucao.chamadoModel.solucaoID);
+            return RedirectToAction("Alterar", "Alterar", new { id });
         }
+
+
+
+
+        private void UploadedFileSolucao(Solucao model)
+        {
+            string uniqueFileName;
+
+            if (model.arquivos != null)
+            {
+                foreach (IFormFile file in model.arquivos)
+                {
+                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/");
+                    uniqueFileName = model.solucaoID + "_" + file.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    // File arquivo = (File)file;
+                }
+            }
+
+        }
+        private void UploadedFileChamado(Chamado model)
+        {
+            string uniqueFileName;
+
+            if (model.arquivos != null)
+            {
+                foreach (IFormFile file in model.arquivos)
+                {
+                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado");
+                    uniqueFileName = model.solucaoID + "_" + file.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    // File arquivo = (File)file;
+                }
+            }
+
+        }
+
+
+
+
+
+
 
 
     }

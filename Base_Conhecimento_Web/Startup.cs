@@ -58,19 +58,26 @@ namespace Base_Conhecimento_Web
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     "Delete",
-                    "/Alterar/Delete/{nome}", //Delete?teste=
+                    "/Alterar/Delete/{nome}",
                     new { controller = "Alterar", action = "Delete", nome = "a" });
+                endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    "Alterar",
+                    "/Alterar/Alterar/{id}",
+                    new { controller = "Alterar", action = "Alterar", id = " "});
                 endpoints.MapRazorPages();
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                            });
+            });
         }
     }
 }

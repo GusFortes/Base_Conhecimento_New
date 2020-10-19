@@ -115,7 +115,8 @@
                     </div>
                     <div class="row">
 
-                        <div class="btn-group"> Quem pode visualizar essa Solução?
+                        <div class="btn-group">
+                            Quem pode visualizar essa Solução?
                             <select class="btn-primary" asp-for="solucaoModel.visualizacao" value="Selecione">
                                 <option value="Quem pode visualizar">Selecione</option>
                                 <option value="Analista">Analista</option>
@@ -134,16 +135,11 @@
                         <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
                     </div>
 
-                    
                     <div class="form-group">
                         <input type="submit" value="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
                         <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
                     </div>
 
-                    @*<form action="processa_imagem_perfil.php" method="post" enctype="multipart/form-data">
-                            <label>Imagem de perfil: <input type="file" name="image[]" multiple="multiple"></label>
-                            <input type="submit" value="Submit">
-                        </form>*@
                 </form>
 
             </div>

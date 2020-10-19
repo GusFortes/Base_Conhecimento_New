@@ -41,7 +41,7 @@ namespace Base_Conhecimento_Web.Controllers
             Chamado cham = chamadoSolucao.chamadoModel;
             fachada.registrarChamado(cham);
             ChamadoSolucaoViewModel chamadoSolucaoView = fachada.persistirInformacoes(sol, cham);
-           
+
             if (chamadoSolucaoView.solucaoModel != null && chamadoSolucaoView.chamadoModel != null)
             {
                 List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
@@ -54,7 +54,6 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 return View("Erro");
             }
-
         }
 
         [HttpPost]
@@ -105,16 +104,6 @@ namespace Base_Conhecimento_Web.Controllers
 
         }
 
-        private void DeleteFile(IFormFile file)
-        {
-            string nomearquivo = file.FileName;
-            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/", nomearquivo);
-            if (System.IO.File.Exists(arquivo))
-            {
-                System.IO.File.Delete(arquivo);
-            }
-
-        }
     }
 
 }

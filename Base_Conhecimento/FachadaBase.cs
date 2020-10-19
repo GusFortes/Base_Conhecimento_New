@@ -65,14 +65,9 @@ namespace Base_Conhecimento
             return solucaoDao.consultaSolucoes(problema, usuarioLogado);
         }
 
-        public Chamado retornarChamado()
+        public Chamado alterarChamado(Chamado chamadoModel)
         {
-            return chamadoaux;
-        }
-
-        public bool alterarChamado(Chamado chamadoModel)
-        {
-
+            chamadoModel.usuarioID = usuarioLogado.usuarioID;
             chamadoModel.solucaoID = idSolucao;
             return solucaoDao.alterarChamado(chamadoModel);
         }
@@ -85,14 +80,9 @@ namespace Base_Conhecimento
             return this.solucaoaux;
         }
 
-        public bool alterarSolucao(Solucao sol)
+        public Solucao alterarSolucao(Solucao sol)
         {
-            sol.solucaoID = idSolucao;
-            this.solucaoaux.titulo = sol.titulo;
-            this.solucaoaux.descricao = sol.descricao;
-            this.solucaoaux.usuarioID = usuarioLogado.usuarioID;
-
-            return solucaoDao.alterarSolucao(solucaoaux);
+            return solucaoDao.alterarSolucao(sol);
         }
 
         public ChamadoSolucaoViewModel ExluirArquivo(string nome)

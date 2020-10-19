@@ -16,20 +16,22 @@
 <body>
 
     <div class="container" id="chamado">
-        <h2> @Html.DisplayNameFor(model => model.chamadoModel.descricao)</h2>
-
 
         @foreach (var item in Model)
         {
-            <div id="anexos">
-                Anexos<br>
-                @if (item.chamadoModel.nomeArquivos != null)
-                {
+            @if (item.chamadoModel.nomeArquivos != null)
+            {
+                <div id="anexos">
+
+                    Anexos<br>
                     @foreach (var anexo in item.chamadoModel.nomeArquivos)
                     {
                         <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
-                    }}
-            </div>
+                    }
+
+                </div>
+            }
+            <p>@Html.Raw(item.solucaoModel.titulo)</p>
 
             <p>@Html.Raw(item.chamadoModel.descricao)</p>
         }
@@ -37,21 +39,22 @@
     <div class="container" id="solucao">
         @foreach (var item in Model)
         {
-            <h2> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h2>
+            <h3> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h3>
             <div class="row">
                 Data atualização
                 @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
             </div>
-            <div id="anexos">
-                Anexos<br>
-                @if (item.chamadoModel.nomeArquivos != null)
-                {
+            @if (item.chamadoModel.nomeArquivos != null)
+            {
+                <div id="anexos">
+                    Anexos<br>
                     @foreach (var anexo in item.solucaoModel.nomeArquivos)
                     {
                         <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
                     }
-                }
-            </div>
+                </div>
+            }
+
             <div class="container">
 
                 @Html.Raw(item.solucaoModel.descricao)
