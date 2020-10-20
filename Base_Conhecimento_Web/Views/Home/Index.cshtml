@@ -17,31 +17,45 @@
         <h1 class="display-4">Base de Conhecimento</h1>
         <p>Encontre a solução do seu problema aqui!</p>
     </div>
-
+    <div class="col-sm-5">
+        O que você procura? <input class="form-control-sm" type="search" id="pesquisa" oninput="limpar()" placeholder="Digite seu problema"> <button class="btn btn-secondary btn-sm" type="button" onclick="filtrar()">Buscar</button>
+    </div>
+    <br>
     <div class="container" id="solucao">
         <section id="content">
+            <br />
+            <ul id="lista">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        @Html.DisplayFor(modelItem => item.chamadoID)
+                        @Html.Raw(item.descricao)
+                        @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoID }, new { @class = "label label-warning" })
+                        <hr />
+                    </li>
 
-            <table class="table">
+                }
+            </ul>
 
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <th>
-                                @Html.DisplayFor(modelItem => item.chamadoID) - @*@Html.DisplayFor(modelItem => item.titulo)*@
-                                @Html.Raw(item.descricao)
-                            </th>
-                            <th>
-                            <th>
-                                @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoID }, new { @class = "label label-warning" })
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
 
         </section>
     </div>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        function limpar() {
+            $('#lista li').show();
+        }
+        function filtrar() {
+            var termo = $('#pesquisa').val().toUpperCase();
+            $('#lista li').each(function () {
+                if ($(this).html().toUpperCase().indexOf(termo) === -1) {
+                    $(this).hide();
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
