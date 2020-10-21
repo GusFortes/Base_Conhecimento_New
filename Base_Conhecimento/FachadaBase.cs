@@ -54,10 +54,10 @@ namespace Base_Conhecimento
             return solucaoDao.consultaChamadoId(id);
         }
 
-        public Chamado consultaChamadoporId(int id)
+        public Chamado consultaChamadoporIdSolucao(int id)
         {
             idSolucao = id;
-            return solucaoDao.consultaChamadoporId(id);
+            return solucaoDao.consultaChamadoporIdSolucao(id);
         }
 
         public List<Solucao> consultaSolucoes(String problema)
@@ -82,14 +82,26 @@ namespace Base_Conhecimento
 
         public Solucao alterarSolucao(Solucao sol)
         {
+            sol.solucaoID = idSolucao;
+            sol.usuarioID = usuarioLogado.usuarioID;
             return solucaoDao.alterarSolucao(sol);
         }
 
-        public ChamadoSolucaoViewModel ExluirArquivo(string nome)
+        public ChamadoSolucaoViewModel ExluirArquivoChamado(string nome)
         {
             ChamadoSolucaoViewModel cs = new ChamadoSolucaoViewModel();
-            Chamado cham = solucaoDao.ExcluirArquivo(nome);
+            Chamado cham = solucaoDao.consultaChamadoporIdSolucao(solucaoDao.ExcluirArquivoChamado(nome).solucaoID);
             Solucao sol = solucaoDao.consultaSolucaoId(cham.solucaoID);
+            cs.chamadoModel = cham;
+            cs.solucaoModel = sol;
+
+            return cs;
+        }
+        public ChamadoSolucaoViewModel ExluirArquivoSolucao(string nome)
+        {
+            ChamadoSolucaoViewModel cs = new ChamadoSolucaoViewModel();
+            Solucao sol = solucaoDao.consultaSolucaoId(solucaoDao.ExcluirArquivoSolucao(nome).solucaoID);
+            Chamado cham = solucaoDao.consultaChamadoporIdSolucao(sol.solucaoID);
             cs.chamadoModel = cham;
             cs.solucaoModel = sol;
 

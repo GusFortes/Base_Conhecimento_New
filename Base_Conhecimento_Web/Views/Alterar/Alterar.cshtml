@@ -81,6 +81,17 @@
 
                     <hr />
                     <br />
+                    @if (Model.solucaoModel.nomeArquivos != null)
+                    {
+                        <ul>
+                            @foreach (String anexo in Model.solucaoModel.nomeArquivos)
+                            {
+                                <a href="~/Base/Solucao/@Html.Raw(anexo)" Download="@Html.Raw(anexo)">@Html.Raw(anexo)</a>
+
+                                @Html.ActionLink("Delete", "DeleteArquivoSolucao", new { nome = @Html.Raw(anexo) }, new { @class = "label label-warning" })
+                            }
+                        </ul>
+                    }
 
                     <div class="form-group">
                         <label asp-for="chamadoModel.descricao" class="control-label"></label>
@@ -121,26 +132,26 @@
                             <option value="Ativo">Ativo</option>
                             <option value="Desativado">Desativado</option>
                         </select>
+                    </div>
 
-
-                        <div class="form-group">
-                            <label asp-for="solucaoModel.descricao" class="control-label"></label>
-                            <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareasolucao" required>
+                    <div class="form-group">
+                        <label asp-for="solucaoModel.descricao" class="control-label"></label>
+                        <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareasolucao" required>
                 @Html.EditorFor(model => model.solucaoModel.descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.solucaoModel.descricao, "", new { @class = "text-danger" })
             </textarea>
-                            <div class="invalid-feedback">
-                                Por favor, preencha essa campo.
-                            </div>
-                            <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
+                        <div class="invalid-feedback">
+                            Por favor, preencha essa campo.
                         </div>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Salvar" asp-action="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
-                            <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
-                        </div>
+                        <span asp-validation-for="solucaoModel.descricao" class="text-danger" type="textarea"></span>
                     </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" asp-action="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
+                        <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
+                    </div>
+
                 </form>
 
             </div>

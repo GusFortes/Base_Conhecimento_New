@@ -54,7 +54,7 @@ namespace Base_Conhecimento_Web.Controllers
             ChamadoSolucaoViewModel solucaoChamado = new ChamadoSolucaoViewModel();
 
             solucaoChamado.solucaoModel = fachada.consultaSolucaoId(id);
-            solucaoChamado.chamadoModel = fachada.consultaChamadoporId(id);
+            solucaoChamado.chamadoModel = fachada.consultaChamadoporIdSolucao(id);
             List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
             cs.Add(solucaoChamado);
 
@@ -68,16 +68,15 @@ namespace Base_Conhecimento_Web.Controllers
         {
             Chamado cham = fachada.alterarChamado(chamadoSolucao.chamadoModel);
             Solucao sol = fachada.alterarSolucao(chamadoSolucao.solucaoModel);
-
-
-            if ( cham!=null && sol!=null )
+            
+            if (cham != null && sol != null)
             {
-                chamadoSolucao.chamadoModel = cham;
-                chamadoSolucao.solucaoModel = sol;
+                chamadoSolucao.chamadoModel = fachada.consultaChamadoporIdSolucao(cham.solucaoID);
+                chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(cham.solucaoID);
                 List<ChamadoSolucaoViewModel> solucaoAlterada = new List<ChamadoSolucaoViewModel>();
                 solucaoAlterada.Add(chamadoSolucao);
-                UploadedFileSolucao(chamadoSolucao.solucaoModel);
-                UploadedFileChamado(chamadoSolucao.chamadoModel);
+                UploadedFileSolucao(sol);
+                UploadedFileChamado(cham);
                 return View("SolucaoAlterada", solucaoAlterada);
             }
             else
@@ -99,7 +98,31 @@ namespace Base_Conhecimento_Web.Controllers
 
             if (System.IO.File.Exists(arquivo))
             {
-                chamadoSolucao = fachada.ExluirArquivo(nome);
+                chamadoSolucao = fachada.ExluirArquivoChamado(nome);
+                cs.Add(chamadoSolucao);
+                System.IO.File.Delete(arquivo);
+
+                id = chamadoSolucao.chamadoModel.solucaoID;
+            }
+
+            return RedirectToAction("Alterar", "Alterar", new { id });
+        }
+
+
+        public ActionResult DeleteArquivoSolucao(String nome)
+        {
+
+            if (nome == null) { }
+
+            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Solucao/" + nome);
+
+            int id = 0;
+            ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
+            List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
+
+            if (System.IO.File.Exists(arquivo))
+            {
+                chamadoSolucao = fachada.ExluirArquivoSolucao(nome);
                 cs.Add(chamadoSolucao);
                 System.IO.File.Delete(arquivo);
 
@@ -112,6 +135,13 @@ namespace Base_Conhecimento_Web.Controllers
 
 
 
+
+
+
+
+
+
+
         private void UploadedFileSolucao(Solucao model)
         {
             string uniqueFileName;
@@ -120,7 +150,7 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 foreach (IFormFile file in model.arquivos)
                 {
-                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/");
+                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Solucao");
                     uniqueFileName = model.solucaoID + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))

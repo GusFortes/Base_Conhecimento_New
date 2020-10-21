@@ -40,11 +40,12 @@
         @foreach (var item in Model)
         {
             <h3> @Html.DisplayNameFor(model => model.solucaoModel.descricao)</h3>
-            <div class="row">
+
+            <div align-text="right">
                 Data atualização
                 @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
             </div>
-            @if (item.chamadoModel.nomeArquivos != null)
+            @if (item.solucaoModel.nomeArquivos != null)
             {
                 <div id="anexos">
                     Anexos<br>

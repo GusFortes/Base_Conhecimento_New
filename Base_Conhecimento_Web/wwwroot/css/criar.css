@@ -21,3 +21,17 @@ body {
     color: #030e45;
     font-weight: bolder;
 }
+
+#data {
+    text-align: right;
+    color: gray;
+    font-size: 12px;
+    position: unset
+}
+
+#anexo {
+    text-align: right;
+    color: gray;
+    font-size: 12px;
+    position: unset
+}

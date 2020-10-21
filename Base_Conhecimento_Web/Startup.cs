@@ -63,6 +63,13 @@ namespace Base_Conhecimento_Web
             {
                 endpoints.MapControllerRoute(
                     "Delete",
+                    "/Alterar/DeleteArquivoSolucao/{nome}",
+                    new { controller = "Alterar", action = "DeleteArquivoSolucao", nome = "a" });
+                endpoints.MapRazorPages();
+
+
+                endpoints.MapControllerRoute(
+                    "Delete",
                     "/Alterar/Delete/{nome}",
                     new { controller = "Alterar", action = "Delete", nome = "a" });
                 endpoints.MapRazorPages();

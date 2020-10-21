@@ -21,7 +21,8 @@
         {
             if (item.chamadoModel.nomeArquivos != null)
             {
-                <div id="anexos">
+                <h2 id="titulo"> @Html.Raw(item.chamadoModel.chamadoID) - @Html.Raw(item.solucaoModel.titulo)</h2>
+                <div class="container" id="anexos">
                     Anexos<br>
                     @foreach (var anexo in item.chamadoModel.nomeArquivos)
                     {
@@ -29,8 +30,7 @@
                     }
                 </div>
             }
-            <br />
-            <h2 id="titulo"> @Html.Raw(item.chamadoModel.chamadoID) - @Html.Raw(item.solucaoModel.titulo)</h2>
+
             <hr />
             <p>@Html.Raw(item.chamadoModel.descricao)</p>
         }
@@ -39,24 +39,22 @@
         @foreach (var item in Model)
         {
             <h2 id="titulo"> Solução @Html.Raw(item.solucaoModel.solucaoID) </h2>
-            <div class="row">
-                Data atualização
+            <div class="container" id="data">
+                Data de atualização:
                 @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
-
             </div>
-            <hr />
-            <br />
+
             if (item.solucaoModel.nomeArquivos != null)
             {
-                <div id="anexos">
-                    Anexos<br>
+                <div class="container" id="anexos">
+                 Anexos:
                     @foreach (var anexo in item.solucaoModel.nomeArquivos)
                     {
                         <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
-                    }
+                      }
                 </div>
             }
-
+            <hr />
             <div class="container">
 
                 @Html.Raw(item.solucaoModel.descricao)

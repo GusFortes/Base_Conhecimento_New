@@ -15,7 +15,7 @@ namespace Base_Conhecimento.Controllers
         private FachadaBase fachada = FachadaBase.getInstance();
         public IActionResult Index()
         {
-            List<Solucao> solucoes = fachada.consultaTodasSolucoes();
+            
             List<Chamado> chamados = fachada.consultaTodosChamados();
             List <ChamadoUserViewModel> usuariochamados = new List<ChamadoUserViewModel>();
             ChamadoUserViewModel chamadoUser = new ChamadoUserViewModel();

@@ -91,7 +91,7 @@ namespace Base_Conhecimento.DAO
 
         }
 
-        public Chamado ExcluirArquivo(string nome)
+        public Chamado ExcluirArquivoChamado(string nome)
         {
             Chamado chamado = new Chamado();
             List<String> arquivonome = new List<String>();
@@ -125,11 +125,78 @@ namespace Base_Conhecimento.DAO
                         cham.nomeArquivo = "/" + nomeArq;
                     }
                 }
+                else
+                {
+                    cham.nomeArquivo = "";
+                }
                 chamado = cham;
             }
             db.SaveChanges();
             return chamado;
         }
+
+        public Solucao ExcluirArquivoSolucao(string nome)
+        {
+            Solucao solucao = new Solucao();
+            List<String> arquivonome = new List<String>();
+            foreach (String nomeArquivo in nome.Split("_"))
+            {
+                arquivonome.Add(nomeArquivo);
+
+            }
+            int id = Int32.Parse(arquivonome.First());
+            String arquivo = arquivonome.Last();
+
+            var solu = from s in db.Solucao
+                       where s.solucaoID == id
+                       select s;
+
+            List<String> listaDeNomes = new List<String>();
+
+            foreach (Solucao soldb in solu)
+            {
+                foreach (String nomeArquivo in soldb.nomeArquivo.Split("/"))
+                {
+
+                    listaDeNomes.Add(nomeArquivo);
+                }
+
+                listaDeNomes.Remove(arquivo);
+
+                if (listaDeNomes.Count() > 1)
+                {
+                    foreach (String nomeArq in listaDeNomes)
+                    {
+                        soldb.nomeArquivo = "/" + nomeArq;
+                    }
+                }
+                else
+                {
+                    soldb.nomeArquivo = "";
+                }
+                solucao = soldb;
+            }
+            db.SaveChanges();
+            return solucao;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public Chamado persistirChamado(Chamado chamado)
         {
@@ -234,7 +301,7 @@ namespace Base_Conhecimento.DAO
             return chamado;
         }
 
-        public Chamado consultaChamadoporId(int id)
+        public Chamado consultaChamadoporIdSolucao(int id)
         {
             Chamado chamado = new Chamado();
 
@@ -246,10 +313,10 @@ namespace Base_Conhecimento.DAO
             {
                 chamado = cham;
             }
-
+            List<String> arquivoNome = new List<string>();
             if (chamado.nomeArquivo != "" && chamado.nomeArquivo != null)
             {
-                List<String> arquivoNome = new List<string>();
+
                 foreach (String nome in chamado.nomeArquivo.Split("/"))
                 {
                     if (nome == "") { }
@@ -258,8 +325,9 @@ namespace Base_Conhecimento.DAO
                         arquivoNome.Add(chamado.solucaoID + "_" + nome);
                     }
                 }
-                chamado.nomeArquivos = arquivoNome;
+
             }
+            chamado.nomeArquivos = arquivoNome;
             return chamado;
         }
 
@@ -303,10 +371,9 @@ namespace Base_Conhecimento.DAO
             {
                 solucaoencontrada = sol;
             }
-
+            List<String> arquivoNome = new List<string>();
             if (solucaoencontrada.nomeArquivo != "" && solucaoencontrada.nomeArquivo != null)
             {
-                List<String> arquivoNome = new List<string>();
                 foreach (String nome in solucaoencontrada.nomeArquivo.Split("/"))
                 {
                     if (nome == "") { }
@@ -315,6 +382,11 @@ namespace Base_Conhecimento.DAO
                         arquivoNome.Add(solucaoencontrada.solucaoID + "_" + nome);
                     }
                 }
+                solucaoencontrada.nomeArquivos = arquivoNome;
+
+            }
+            else
+            {
                 solucaoencontrada.nomeArquivos = arquivoNome;
             }
             return solucaoencontrada;
@@ -397,7 +469,6 @@ namespace Base_Conhecimento.DAO
                 {
                     c.descricao = chamado.descricao;
                     c.itemCatalogo = chamado.itemCatalogo;
-
                 }
 
             }
