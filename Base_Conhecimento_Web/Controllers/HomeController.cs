@@ -42,26 +42,22 @@ namespace Base_Conhecimento.Controllers
             chamadoSolucao.chamadoModel = fachada.consultaChamadoId(id);
             chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(chamadoSolucao.chamadoModel.solucaoID);
 
+            fachada.incrementarVisitas(chamadoSolucao.solucaoModel.solucaoID);
+
             cs.Add(chamadoSolucao);
 
             return View("Solucao", cs);
         }
 
-        public IActionResult Delete(String file)
+        public IActionResult Like(int solucao)
         {
-            //DeleteFile(file);
-            return RedirectToAction("Index", "Home");
+            fachada.incrementarCurtidas(solucao);
+            Chamado cham = fachada.consultaChamadoporIdSolucao(solucao);
+            String id = cham.chamadoID;
+            return RedirectToAction("Solucao", "Home", new { id });
 
         }
 
-        private void DeleteFile(String file)
-        {
-           // string nomearquivo = file.FileName;
-            //var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/", nomearquivo);
-            //if (System.IO.File.Exists(arquivo))
-            //{
-            //    System.IO.File.Delete(arquivo);
-            //}
-        }
+       
     }
 }

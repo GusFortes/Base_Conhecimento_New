@@ -39,7 +39,9 @@ namespace Base_Conhecimento.DAO
                         descricao = solucao.descricao,
                         dataAtualizacao = solucao.dataAtualizacao,
                         visualizacao = solucao.visualizacao,
-                        status = "Ativo"
+                        status = "Ativo",
+                        visitas = 0,
+                        curtidas = 0
                     });
                     solucao.solucaoID = contador;
                     return solucao;
@@ -62,6 +64,8 @@ namespace Base_Conhecimento.DAO
                         dataAtualizacao = solucao.dataAtualizacao,
                         visualizacao = solucao.visualizacao,
                         status = "Ativo",
+                        visitas = 0,
+                        curtidas = 0,
                         nomeArquivo = nomeDosArquivos
                     });
 
@@ -89,6 +93,32 @@ namespace Base_Conhecimento.DAO
                 throw new NotImplementedException("Erro ao Gravar Solução. Verifique os dados e tente novamente.");
             }
 
+        }
+
+        internal void incrimentarCurtidas(int id)
+        {
+            var solucao = from s in db.Solucao
+                          where s.solucaoID == id
+                          select s;
+
+            foreach (Solucao sol in solucao)
+            {
+                sol.curtidas++;
+            }
+            db.SaveChanges();
+        }
+
+        internal void incrimentarVisitas(int id)
+        {
+            var solucao = from s in db.Solucao
+                          where s.solucaoID == id
+                          select s;
+
+            foreach (Solucao sol in solucao)
+            {
+                sol.visitas++;
+            }
+            db.SaveChanges();
         }
 
         public Chamado ExcluirArquivoChamado(string nome)
@@ -180,28 +210,10 @@ namespace Base_Conhecimento.DAO
             return solucao;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public Chamado persistirChamado(Chamado chamado)
         {
-            try
-            {
+            //try
+            //{
                 if (chamado.arquivos == null)
                 {
                     db.Chamado.Add(new Chamado
@@ -248,12 +260,12 @@ namespace Base_Conhecimento.DAO
                     }
                     return chamado;
                 }
-            }
+            //}
 
-            catch
-            {
-                throw new NotImplementedException("Erro ao Gravar Chamado. Verifique os dados e tente novamente.");
-            }
+            //catch
+            //{
+            //    throw new NotImplementedException("Erro ao Gravar Chamado. Verifique os dados e tente novamente.");
+            //}
         }
 
         public List<Chamado> consultaTodosChamados()

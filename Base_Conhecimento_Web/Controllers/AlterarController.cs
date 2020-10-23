@@ -68,7 +68,7 @@ namespace Base_Conhecimento_Web.Controllers
         {
             Chamado cham = fachada.alterarChamado(chamadoSolucao.chamadoModel);
             Solucao sol = fachada.alterarSolucao(chamadoSolucao.solucaoModel);
-            
+
             if (cham != null && sol != null)
             {
                 chamadoSolucao.chamadoModel = fachada.consultaChamadoporIdSolucao(cham.solucaoID);
@@ -131,16 +131,6 @@ namespace Base_Conhecimento_Web.Controllers
 
             return RedirectToAction("Alterar", "Alterar", new { id });
         }
-
-
-
-
-
-
-
-
-
-
 
         private void UploadedFileSolucao(Solucao model)
         {

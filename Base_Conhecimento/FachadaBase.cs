@@ -54,10 +54,20 @@ namespace Base_Conhecimento
             return solucaoDao.consultaChamadoId(id);
         }
 
+        public void incrementarVisitas(int id)
+        {
+            solucaoDao.incrimentarVisitas(id);
+        }
+
         public Chamado consultaChamadoporIdSolucao(int id)
         {
             idSolucao = id;
             return solucaoDao.consultaChamadoporIdSolucao(id);
+        }
+
+        public void incrementarCurtidas(int id)
+        {
+            solucaoDao.incrimentarCurtidas(id);
         }
 
         public List<Solucao> consultaSolucoes(String problema)

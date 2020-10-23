@@ -19,23 +19,19 @@ namespace Base_Conhecimento
 
         [Display(Name = "Título")]
         public String titulo { get; set; }
-
-
         public int usuarioID { get; set; }
-
 
         [AllowHtml]
         [Display(Name = "Descrição")]
         public String descricao { get; set; }
 
-
         [Display(Name = "Data de Atualização")]
         public DateTime dataAtualizacao { get; set; }
-
         public String visualizacao { get; set; }
         public String status { get; set; }
-
         public String nomeArquivo { get; set; }
+        public int visitas { get; set; }
+        public int curtidas { get; set; }
 
         [NotMapped]
         public List<IFormFile> arquivos { get; set; }

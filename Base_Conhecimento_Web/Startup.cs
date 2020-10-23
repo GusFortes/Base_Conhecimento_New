@@ -62,6 +62,19 @@ namespace Base_Conhecimento_Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    "Like",
+                    "Consulta/like/{solucao}",
+                    new { controller = "Consulta", action = "Like", solucao = 0 });
+                endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    "Like",
+                    "Solucao/like/{solucao}",
+                    new { controller = "Home", action = "Like", solucao = 0 });
+                endpoints.MapRazorPages();
+
+
+                endpoints.MapControllerRoute(
                     "Delete",
                     "/Alterar/DeleteArquivoSolucao/{nome}",
                     new { controller = "Alterar", action = "DeleteArquivoSolucao", nome = "a" });

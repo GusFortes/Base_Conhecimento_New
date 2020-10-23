@@ -40,8 +40,8 @@
         {
             <h2 id="titulo"> Solução @Html.Raw(item.solucaoModel.solucaoID) </h2>
             <div class="container" id="data">
-                Data de atualização:
-                @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)
+                Data de atualização: @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)<br>
+                Visitas: @Html.DisplayFor(modelItem => item.solucaoModel.visitas)
             </div>
 
             if (item.solucaoModel.nomeArquivos != null)
@@ -58,9 +58,12 @@
             <div class="container">
 
                 @Html.Raw(item.solucaoModel.descricao)
+                <hr>
+            </div>
+            <div class="container" id="like">
+                Essa solução foi útil? @Html.ActionLink("Clique Aqui", "Like", new { solucao = @Html.Raw(item.solucaoModel.solucaoID) }, new { @class = "btn btn-outline-primary btn-sm" })
 
             </div>
-
         }
 
     </div>
