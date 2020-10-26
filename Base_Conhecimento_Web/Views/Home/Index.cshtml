@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Base_Conhecimento.Chamado>
+﻿@model IEnumerable<Base_Conhecimento.ChamadoSolucaoViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -27,12 +27,14 @@
             <ul id="lista">
                 @foreach (var item in Model)
                 {
-                    <li>
-                        @Html.DisplayFor(modelItem => item.chamadoID)
-                        @Html.Raw(item.descricao)
-                        @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoID }, new { @class = "label label-warning" })
-                        <hr />
-                    </li>
+                <li>
+                    <div class= "container" id="titulo">
+                        @Html.DisplayFor(modelItem => item.chamadoModel.chamadoID): @Html.DisplayFor(modelItem => item.solucaoModel.titulo)
+                    </div>
+                    @Html.Raw(item.chamadoModel.descricao)
+                    @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoModel.chamadoID }, new { @class = "label label-warning" })
+                    <hr />
+                </li>
 
                 }
             </ul>

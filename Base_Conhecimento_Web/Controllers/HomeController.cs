@@ -17,11 +17,22 @@ namespace Base_Conhecimento.Controllers
         {
             
             List<Chamado> chamados = fachada.consultaTodosChamados();
+            
+            List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
+
+            foreach (Chamado c in chamados) {
+                ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
+                chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(c.solucaoID);
+                chamadoSolucao.chamadoModel = c;
+                cs.Add(chamadoSolucao);            
+            }
+
+
             List <ChamadoUserViewModel> usuariochamados = new List<ChamadoUserViewModel>();
             ChamadoUserViewModel chamadoUser = new ChamadoUserViewModel();
             
 
-            return View(chamados);
+            return View(cs);
         }
 
         public IActionResult Privacy()

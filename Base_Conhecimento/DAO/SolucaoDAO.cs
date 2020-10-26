@@ -57,7 +57,7 @@ namespace Base_Conhecimento.DAO
 
                     db.Solucao.Add(new Solucao
                     {
-                        solucaoID = contador + 1,
+                        solucaoID = contador,
                         titulo = solucao.titulo,
                         usuarioID = solucao.usuarioID,
                         descricao = solucao.descricao,
@@ -69,7 +69,7 @@ namespace Base_Conhecimento.DAO
                         nomeArquivo = nomeDosArquivos
                     });
 
-                    solucao.solucaoID = contador++;
+                    solucao.solucaoID = contador;
 
                     if (nomeDosArquivos != "")
                     {

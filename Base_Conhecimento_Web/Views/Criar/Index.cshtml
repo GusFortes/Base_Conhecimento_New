@@ -40,12 +40,12 @@
 
     <div class="mx-auto py-4">
         <div class="card">
-            <div class="card-header bg-primary text-uppercase text-white">
-                <h3>Insira as informações do chamado e Solução</h3>
-            </div>
+
             <div class="card-body">
                 <form enctype="multipart/form-data" asp-action="Salvar" method="post" class="needs-validation" novalidate>
-
+                    <div class="card-header bg-primary text-white">
+                        <h4>Insira as informações do chamado</h4>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="chamadoModel.arquivos" class="control-label"></label>
+                                <label asp-for="chamadoModel.arquivos" class="control-label">Anexos</label>
                                 <div class="custom-file">
                                     <input asp-for="chamadoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
@@ -88,10 +88,8 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="form-group">
-                        <label asp-for="chamadoModel.descricao" class="control-label"></label>
+                        <label asp-for="chamadoModel.descricao" class="control-label">Descreva o chamado</label>
                         <textarea input asp-for="chamadoModel.descricao" class="form-control" id="textareasolucao" required>
                              </textarea>
                         <div class="invalid-feedback">
@@ -100,34 +98,35 @@
                         <span asp-validation-for="chamadoModel.descricao" class="text-danger" type="textarea"></span>
                     </div>
 
+                    <div class="card-header bg-primary text-white">
+                        <h4>Insira as informações da Solução</h4>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="solucaoModel.arquivos" class="control-label"></label>
+                                <label asp-for="solucaoModel.arquivos" class="control-label">Anexos</label>
                                 <div class="custom-file">
-                                    <input asp-for="solucaoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">>
+                                    <input asp-for="solucaoModel.arquivos" type="file" class="custom-file-input" id="customFile" multiple="multiple">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                                 <span asp-validation-for="solucaoModel.arquivos" class="text-danger"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="btn-group">
-                            Quem pode visualizar essa Solução?
-                            <select class="btn-primary" asp-for="solucaoModel.visualizacao" value="Selecione">
-                                <option value="Quem pode visualizar">Selecione</option>
-                                <option value="Analista">Analista</option>
-                                <option value="Cliente">Cliente</option>
-                            </select>
+                        <div class="col-md-6">
+                            <br /><br />
+                            <div class="btn-group">
+                                <label>Quem pode visualizar essa Solução?</label>
+                                <select class="btn btn-outline-primary btn-sm" asp-for="solucaoModel.visualizacao" value="Selecione">
+                                    <option value="Quem pode visualizar">Selecione</option>
+                                    <option value="Analista">Analista</option>
+                                    <option value="Cliente">Cliente</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-
                     <div class="form-group">
-                        <label asp-for="solucaoModel.descricao" class="control-label"></label>
+                        <label asp-for="solucaoModel.descricao" class="control-label">Descreva a solução do chamado</label>
                         <textarea input asp-for="solucaoModel.descricao" class="form-control" id="textareachamado" required></textarea>
                         <div class="invalid-feedback">
                             Por favor, preencha essa campo.
@@ -137,7 +136,7 @@
 
                     <div class="form-group">
                         <input type="submit" value="Salvar" class="btn btn-sm btn-primary rounded-0 text-uppercase" />
-                        <a asp-action="Index" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
                     </div>
 
                 </form>

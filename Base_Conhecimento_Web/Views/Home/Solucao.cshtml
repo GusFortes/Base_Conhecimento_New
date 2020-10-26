@@ -19,16 +19,20 @@
 
         @foreach (var item in Model)
         {
+            <h2 id="titulo"> Chamado @Html.Raw(item.chamadoModel.chamadoID) - @Html.Raw(item.solucaoModel.titulo) </h2>
+
             if (item.chamadoModel.nomeArquivos != null)
             {
-                <h2 id="titulo"> @Html.Raw(item.chamadoModel.chamadoID) - @Html.Raw(item.solucaoModel.titulo)</h2>
-                <div class="container" id="anexos">
-                    Anexos<br>
-                    @foreach (var anexo in item.chamadoModel.nomeArquivos)
-                    {
-                        <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
-                    }
-                </div>
+                if (item.solucaoModel.nomeArquivos.Count > 0)
+                {
+                    <div class="container" id="anexos">
+                        Anexos
+                        @foreach (var anexo in item.chamadoModel.nomeArquivos)
+                        {
+                            <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                        }
+                    </div>
+                }
             }
 
             <hr />
@@ -46,13 +50,16 @@
 
             if (item.solucaoModel.nomeArquivos != null)
             {
-                <div class="container" id="anexos">
-                 Anexos:
-                    @foreach (var anexo in item.solucaoModel.nomeArquivos)
-                    {
-                        <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
-                      }
-                </div>
+                if (item.solucaoModel.nomeArquivos.Count > 0)
+                {
+                    <div class="container" id="anexos">
+                        Anexos 
+                        @foreach (var anexo in item.solucaoModel.nomeArquivos)
+                        {
+                            <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                        }
+                    </div>
+                }
             }
             <hr />
             <div class="container">
