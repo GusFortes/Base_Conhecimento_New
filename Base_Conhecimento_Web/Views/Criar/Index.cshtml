@@ -66,6 +66,7 @@
                                 </div>
                                 <span asp-validation-for="chamadoModel.chamadoID" class="text-danger"></span>
                             </div>
+                            @*@Html.ValidationMessageFor(model => Model.chamadoModel.chamadoID)*@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -117,7 +118,7 @@
                             <br /><br />
                             <div class="btn-group">
                                 <label>Quem pode visualizar essa Solução?</label>
-                                <select class="btn btn-outline-primary btn-sm" asp-for="solucaoModel.visualizacao" value="Selecione">
+                                <select asp-for="solucaoModel.visualizacao" value="Selecione">
                                     <option value="Quem pode visualizar">Selecione</option>
                                     <option value="Analista">Analista</option>
                                     <option value="Cliente">Cliente</option>

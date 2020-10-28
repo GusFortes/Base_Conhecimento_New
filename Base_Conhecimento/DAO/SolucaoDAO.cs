@@ -12,11 +12,13 @@ namespace Base_Conhecimento.DAO
         public ChamadoSolucaoViewModel persistirInformacoes(Solucao solucao, Chamado chamado)
         {
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
-
-            chamadoSolucao.solucaoModel = persistirSolucao(solucao);
-            chamado.solucaoID = chamadoSolucao.solucaoModel.solucaoID;
-            chamadoSolucao.chamadoModel = persistirChamado(chamado);
-
+            try
+            {
+                chamadoSolucao.solucaoModel = persistirSolucao(solucao);
+                chamado.solucaoID = chamadoSolucao.solucaoModel.solucaoID;
+                chamadoSolucao.chamadoModel = persistirChamado(chamado);
+            }
+            catch { throw new NotImplementedException("Erro ao Gravar Solução. Verifique os dados e tente novamente."); }
             return chamadoSolucao;
         }
 
@@ -212,8 +214,8 @@ namespace Base_Conhecimento.DAO
 
         public Chamado persistirChamado(Chamado chamado)
         {
-            //try
-            //{
+            try
+            {
                 if (chamado.arquivos == null)
                 {
                     db.Chamado.Add(new Chamado
@@ -244,6 +246,7 @@ namespace Base_Conhecimento.DAO
                         nomeArquivo = nomeDosArquivos
                     });
                     db.SaveChanges();
+                    
 
                     if (nomeDosArquivos != "")
                     {
@@ -260,12 +263,12 @@ namespace Base_Conhecimento.DAO
                     }
                     return chamado;
                 }
-            //}
+            }
 
-            //catch
-            //{
-            //    throw new NotImplementedException("Erro ao Gravar Chamado. Verifique os dados e tente novamente.");
-            //}
+            catch
+            {
+                throw new NotImplementedException("Erro ao Gravar Chamado. Verifique os dados e tente novamente.");
+            }
         }
 
         public List<Chamado> consultaTodosChamados()
@@ -472,9 +475,9 @@ namespace Base_Conhecimento.DAO
             var chamados = from c in db.Chamado
                            where c.solucaoID == chamado.solucaoID
                            select c;
-            //try
-            //{
-            if (chamado.arquivos == null)
+            try
+            {
+                if (chamado.arquivos == null)
             {
 
                 foreach (Chamado c in chamados)
@@ -517,14 +520,10 @@ namespace Base_Conhecimento.DAO
 
             db.SaveChanges();
             return chamado;
-            //}
-            //catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
+            }
+            catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
 
         }
-
-
-
-
 
         public List<Solucao> consultaSolucoes(string problema, Usuario usuario)
         {
@@ -550,12 +549,26 @@ namespace Base_Conhecimento.DAO
                         {
                             if (usuario != null && usuario.nivel)
                             {
-                                solucoesencontradas.Add(se);
+                                if (solucoesencontradas.Contains(se))
+                                {
+
+                                }
+                                else
+                                {
+                                    solucoesencontradas.Add(se);
+                                }
                             }
                         }
                         else
                         {
-                            solucoesencontradas.Add(se);
+                            if (solucoesencontradas.Contains(se))
+                            {
+
+                            }
+                            else
+                            {
+                                solucoesencontradas.Add(se);
+                            }
                         }
                     }
                 }

@@ -1,25 +1,27 @@
 ﻿@model IEnumerable<Base_Conhecimento.Solucao>
 
 @{
-    ViewData["Title"] = "Solução Encontrada";
+    ViewData["Title"] = "Soluões Encontradas";
 
 }
 
-<h1>Solução Encontrada</h1>
+<h3>Soluções Encontradas</h3>
 
-<table class="table" align="center">
+
     @foreach (var item in Model)
     {
+    <ul>
         <li>
-            @Html.DisplayFor(modelItem => item.solucaoID)
+            Solução @Html.DisplayFor(modelItem => item.solucaoID)
             @Html.Raw(item.descricao)
             @Html.ActionLink("Ver solução completa", "Solucao", new { sol = item.solucaoID }, new { @class = "label label-warning" })
             <hr />
         </li>
+    </ul>
 
     }
 
-</table>
+
 <div class="form-group">
     <input asp-action="Index" type="submit" value="Voltar" />
 </div>

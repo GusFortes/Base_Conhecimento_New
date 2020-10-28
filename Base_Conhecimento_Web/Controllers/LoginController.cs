@@ -13,7 +13,8 @@ namespace Base_Conhecimento_Web.Controllers
         private FachadaBase fachada = FachadaBase.getInstance();
         public IActionResult Index()
         {
-            return View();
+            Usuario usuario = new Usuario();
+            return View(usuario);
         }
 
         [HttpPost]
@@ -21,8 +22,8 @@ namespace Base_Conhecimento_Web.Controllers
         {
             if (fachada.Login(usuario.usuarioID) == null)
             {
-                ModelState.AddModelError("", "Usuário ou senha inválidos");
-                return View("Index");
+                ModelState.AddModelError("usuarioID", "Credenciais Inválidas. Favor, verifique."); ;
+                return View("Index", usuario);
             }
             else
             {

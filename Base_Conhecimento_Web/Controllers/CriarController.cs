@@ -17,6 +17,7 @@ namespace Base_Conhecimento_Web.Controllers
         public IActionResult Index()
         {
             Usuario user = fachada.Login(id);
+            ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
 
             if (user == null)
             {
@@ -24,7 +25,7 @@ namespace Base_Conhecimento_Web.Controllers
             }
             else
             {
-                return View();
+                return View(chamadoSolucao);
             }
         }
 
@@ -37,6 +38,18 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Salvar(ChamadoSolucaoViewModel chamadoSolucao)
         {
+            
+
+            if (fachada.consultaChamadoId(chamadoSolucao.chamadoModel.chamadoID).chamadoID !=null)
+            {
+                ModelState.AddModelError("chamadoModel.chamadoID", "Esse código de chamado já está cadastrado. Favor, verifique.");
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                return View("Index", chamadoSolucao);
+            }
+
             Solucao sol = chamadoSolucao.solucaoModel;
             Chamado cham = chamadoSolucao.chamadoModel;
             fachada.registrarChamado(cham);

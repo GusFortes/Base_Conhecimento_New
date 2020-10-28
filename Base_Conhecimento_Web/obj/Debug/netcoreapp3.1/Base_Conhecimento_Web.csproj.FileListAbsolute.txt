@@ -117,9 +117,6 @@ C:\Users\gus_f\Desktop\Base\Base_Conhecimento\Base_Conhecimento_Web\obj\Debug\ne
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Base_Conhecimento.exe
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
-C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Base_Conhecimento_Web.StaticWebAssets.xml
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Base_Conhecimento_Web.exe
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Base_Conhecimento_Web.deps.json
@@ -238,3 +235,6 @@ C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debu
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Solucao.cshtml.g.cs
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json

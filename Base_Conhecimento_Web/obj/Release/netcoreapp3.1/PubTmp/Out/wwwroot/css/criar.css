@@ -1,0 +1,37 @@
+﻿
+#solucao, #chamado {
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    position: initial;
+    text-align: left;
+    margin-bottom: 1.5em;
+    line-height: 180%;
+}
+
+body {
+    background: #e9f5fe;
+    font-family: 'Lato', sans-serif;
+    font-size: 12pt;
+}
+
+#titulo {
+    font-size: 20px;
+    font-family: 'Lato', 'Times New Roman';
+    text-align: left;
+    color: #030e45;
+    font-weight: bolder;
+}
+
+#data {
+    text-align: right;
+    color: gray;
+    font-size: 12px;
+    position: unset
+}
+
+#anexo {
+    text-align: right;
+    color: gray;
+    font-size: 12px;
+    position: unset
+}
