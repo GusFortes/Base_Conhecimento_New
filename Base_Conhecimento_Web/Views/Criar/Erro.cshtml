@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Base_Conhecimento.ChamadoSolucaoUserViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/estilo.css" />
+</head>
+
+
+<body>
+
+    <div class="text-center">
+        <h6 class="display-4">Você não possui acesso a essa funcionalidade</h6>
+        <p>Entre com um usuário da TI para continuar!</p>
+    </div>
+
+    @Html.ActionLink("Voltar", "Index", "Home", "", new { @class = "btn btn-outline-primary btn-sm" })
+
+
+
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        function limpar() {
+            $('#lista li').show();
+        }
+        function filtrar() {
+            var termo = $('#pesquisa').val().toUpperCase();
+            $('#lista li').each(function () {
+                if ($(this).html().toUpperCase().indexOf(termo) === -1) {
+                    $(this).hide();
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

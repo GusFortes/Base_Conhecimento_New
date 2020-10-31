@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Base_Conhecimento.ChamadoSolucaoViewModel>
+﻿@model IEnumerable<Base_Conhecimento.ChamadoSolucaoUserViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -12,6 +12,24 @@
 
 
 <body>
+
+    
+        @if (Model.First().usuarioModel.usuarioID == 0)
+        {
+    <div class="container" id="login">
+        @Html.ActionLink("Login", "Login", "" ,"" , new { @class = "btn btn-outline-primary btn-sm" })
+        
+    </div>
+        }
+        else
+        {
+<div class="container" id="login">
+    Olá @Html.DisplayFor(modelItem => Model.First().usuarioModel.nome)
+    @Html.ActionLink("Logout", "Logout", "", "", new { @class = "btn btn-outline-primary btn-sm" })
+</div>
+        }
+    
+
 
     <div class="text-center">
         <h1 class="display-4">Base de Conhecimento</h1>
@@ -27,14 +45,14 @@
             <ul id="lista">
                 @foreach (var item in Model)
                 {
-                <li>
-                    <div class= "container" id="titulo">
-                        @Html.DisplayFor(modelItem => item.chamadoModel.chamadoID): @Html.DisplayFor(modelItem => item.solucaoModel.titulo)
-                    </div>
-                    @Html.Raw(item.chamadoModel.descricao)
-                    @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoModel.chamadoID }, new { @class = "label label-warning" })
-                    <hr />
-                </li>
+                    <li>
+                        <div class="container" id="titulo">
+                            @Html.DisplayFor(modelItem => item.chamadoModel.chamadoID)- @Html.DisplayFor(modelItem => item.solucaoModel.titulo)
+                        </div>
+                        @Html.Raw(item.chamadoModel.descricao)
+                        @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoModel.chamadoID }, new { @class = "label label-warning" })
+                        <hr />
+                    </li>
 
                 }
             </ul>

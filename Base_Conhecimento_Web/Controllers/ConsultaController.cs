@@ -10,9 +10,9 @@ namespace Base_Conhecimento_Web.Controllers
     public class ConsultaController : Controller
     {
         FachadaBase fachada = new FachadaBase();
-        public IActionResult Index()
+        public IActionResult Index(Solucao sol)
         {
-            return View();
+            return View(sol);
         }
 
         [HttpPost]
@@ -27,9 +27,9 @@ namespace Base_Conhecimento_Web.Controllers
             }
             else
             {
-                return View("SemResultado");
+                ModelState.AddModelError("descricao", "Nenhum resultado encontrado.");
+                return View("Index", sol);
             }
-
         }
         public IActionResult Solucao(int sol)
         {

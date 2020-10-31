@@ -19,28 +19,28 @@ namespace Base_Conhecimento_Web.Controllers
             Usuario user = fachada.Login(id);
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
 
-            if (user == null)
+            if (user.usuarioID == 0)
             {
                 return RedirectToAction("Index", "Login");
             }
             else
             {
-                return View(chamadoSolucao);
+                if (user.nivel)
+                {
+                    return View(chamadoSolucao);
+                }
+                else
+                {
+                    return View("Erro");
+                }
             }
         }
 
-        //public IActionResult Avancar(Chamado cham)
-        //{
-        //    fachada.registrarChamado(cham);
-        //    return View("Solucao");
-        //}
 
         [HttpPost]
         public IActionResult Salvar(ChamadoSolucaoViewModel chamadoSolucao)
         {
-            
-
-            if (fachada.consultaChamadoId(chamadoSolucao.chamadoModel.chamadoID).chamadoID !=null)
+            if (fachada.consultaChamadoId(chamadoSolucao.chamadoModel.chamadoID).chamadoID != null)
             {
                 ModelState.AddModelError("chamadoModel.chamadoID", "Esse código de chamado já está cadastrado. Favor, verifique.");
             }
@@ -72,7 +72,7 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Voltar()
         {
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         private void UploadedFileSolucao(Solucao model)
@@ -90,7 +90,6 @@ namespace Base_Conhecimento_Web.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    // File arquivo = (File)file;
                 }
             }
 
@@ -111,7 +110,6 @@ namespace Base_Conhecimento_Web.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    // File arquivo = (File)file;
                 }
             }
 

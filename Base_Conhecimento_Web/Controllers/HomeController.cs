@@ -15,30 +15,36 @@ namespace Base_Conhecimento.Controllers
         private FachadaBase fachada = FachadaBase.getInstance();
         public IActionResult Index()
         {
-            
-            List<Chamado> chamados = fachada.consultaTodosChamados();
-            
-            List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
 
-            foreach (Chamado c in chamados) {
-                ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
+            List<Chamado> chamados = fachada.consultaTodosChamados();
+            Usuario usuarioLogado = fachada.retornaUsuario();
+
+            List<ChamadoSolucaoUserViewModel> cs = new List<ChamadoSolucaoUserViewModel>();
+
+            foreach (Chamado c in chamados)
+            {
+                ChamadoSolucaoUserViewModel chamadoSolucao = new ChamadoSolucaoUserViewModel();
                 chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(c.solucaoID);
                 chamadoSolucao.chamadoModel = c;
-                cs.Add(chamadoSolucao);            
+                chamadoSolucao.usuarioModel = usuarioLogado;
+                if (chamadoSolucao.solucaoModel.status.Equals("Ativo"))
+                {
+                    cs.Add(chamadoSolucao);
+                }
             }
-
-
-            List <ChamadoUserViewModel> usuariochamados = new List<ChamadoUserViewModel>();
-            ChamadoUserViewModel chamadoUser = new ChamadoUserViewModel();
-            
-
             return View(cs);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
         {
-            return View();
+            return RedirectToAction("Index", "Login"); ;
         }
+
+        public IActionResult Logout()
+        {
+            return RedirectToAction("Logout", "Login"); ;
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -46,15 +52,21 @@ namespace Base_Conhecimento.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Solucao(String id)
+        public IActionResult Solucao(String id, bool curtida)
         {
             List<ChamadoSolucaoViewModel> cs = new List<ChamadoSolucaoViewModel>();
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
             chamadoSolucao.chamadoModel = fachada.consultaChamadoId(id);
             chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(chamadoSolucao.chamadoModel.solucaoID);
 
-            fachada.incrementarVisitas(chamadoSolucao.solucaoModel.solucaoID);
+            if (curtida == true)
+            {
 
+            }
+            else
+            {
+                fachada.incrementarVisitas(chamadoSolucao.solucaoModel.solucaoID);
+            }
             cs.Add(chamadoSolucao);
 
             return View("Solucao", cs);
@@ -65,10 +77,9 @@ namespace Base_Conhecimento.Controllers
             fachada.incrementarCurtidas(solucao);
             Chamado cham = fachada.consultaChamadoporIdSolucao(solucao);
             String id = cham.chamadoID;
-            return RedirectToAction("Solucao", "Home", new { id });
+            bool curtida = true;
+            return RedirectToAction("Solucao", "Home", new { id, curtida });
 
         }
-
-       
     }
 }

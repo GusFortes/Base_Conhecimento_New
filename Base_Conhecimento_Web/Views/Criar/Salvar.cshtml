@@ -14,60 +14,72 @@
 </head>
 
 <body>
+    @if (Model.First().solucaoModel.solucaoID == -1 || Model.First().chamadoModel.solucaoID == -1)
+    {
 
-    <div class="container" id="chamado">
+        <div class="text-center">
+            <h6>Erro ao salvar a solução</h6>
+            <p>Verifique as informações. Se o problema persistir, contate o administrador.</p>
 
-        @foreach (var item in Model)
-        {
-            <h2 id="titulo"> Chamado @Html.Raw(item.chamadoModel.chamadoID) - @Html.Raw(item.solucaoModel.titulo) </h2>
+        </div>
+    }
+    else
+    {
+        <div class="container" id="chamado">
 
-            if (item.chamadoModel.nomeArquivos != null)
+
+            @foreach (var item in Model)
             {
-                if (item.solucaoModel.nomeArquivos.Count > 0)
-                {
-                    <div class="container" id="anexos">
-                        Anexos 
-                        @foreach (var anexo in item.chamadoModel.nomeArquivos)
-                        {
-                            <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
-                        }
-                    </div>
-                }
-            }
-            <hr />
-            <p>@Html.Raw(item.chamadoModel.descricao)</p>
-        }
-    </div>
-    <div class="container" id="solucao">
-        @foreach (var item in Model)
-        {
-            <h2 id="titulo"> Solução @Html.Raw(item.solucaoModel.solucaoID) </h2>
-            <div class="container" id="data">
-                Data de atualização: @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)<br>
-            </div>
+                <h2 id="titulo"> Chamado @Html.Raw(item.chamadoModel.chamadoID) - @Html.Raw(item.solucaoModel.titulo) </h2>
 
-            if (item.solucaoModel.nomeArquivos != null)
+                if (item.chamadoModel.nomeArquivos != null)
+                {
+                    if (item.solucaoModel.nomeArquivos.Count > 0)
+                    {
+                        <div class="container" id="anexos">
+                            Anexos
+                            @foreach (var anexo in item.chamadoModel.nomeArquivos)
+                            {
+                                <a href="~/Base/Chamado/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                            }
+                        </div>
+                    }
+                }
+                <hr />
+                <p>@Html.Raw(item.chamadoModel.descricao)</p>
+            }
+        </div>
+        <div class="container" id="solucao">
+            @foreach (var item in Model)
             {
-                if (item.solucaoModel.nomeArquivos.Count > 0)
+                <h2 id="titulo"> Solução @Html.Raw(item.solucaoModel.solucaoID) </h2>
+                <div class="container" id="data">
+                    Data de atualização: @Html.DisplayFor(modelItem => item.solucaoModel.dataAtualizacao)<br>
+                </div>
+
+                if (item.solucaoModel.nomeArquivos != null)
                 {
-                    <div class="container" id="anexos">
-                        Anexos 
-                        @foreach (var anexo in item.solucaoModel.nomeArquivos)
-                        {
-                            <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
-                        }
-                    </div>
+                    if (item.solucaoModel.nomeArquivos.Count > 0)
+                    {
+                        <div class="container" id="anexos">
+                            Anexos
+                            @foreach (var anexo in item.solucaoModel.nomeArquivos)
+                            {
+                                <a href="~/Base/Solucao/@Html.DisplayFor(modelItem => anexo)" Download="@Html.DisplayFor(modelItem => anexo)">@Html.DisplayFor(modelItem => anexo)</a>
+                            }
+                        </div>
+                    }
                 }
+                <hr />
+                <div class="container">
+
+                    @Html.Raw(item.solucaoModel.descricao)
+                    <hr>
+                </div>
             }
-            <hr />
-            <div class="container">
 
-                @Html.Raw(item.solucaoModel.descricao)
-                <hr>
-            </div>
-        }
-
-    </div>
+        </div>
+    }
     <div class="form-group">
         <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-primary rounded-0 text-uppercase"><i class="fas fa-fast-backward"></i>Voltar</a>
     </div>

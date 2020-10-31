@@ -20,16 +20,21 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Login(Usuario usuario)
         {
-            if (fachada.Login(usuario.usuarioID) == null)
+            if (fachada.Login(usuario.usuarioID).usuarioID == 0)
             {
                 ModelState.AddModelError("usuarioID", "Credenciais Inválidas. Favor, verifique."); ;
                 return View("Index", usuario);
             }
             else
-            {
-
+           {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public IActionResult Logout()
+        {
+            fachada.Logout();
+            return RedirectToAction("Index", "Home");
         }
 
 

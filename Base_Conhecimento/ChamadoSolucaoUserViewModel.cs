@@ -4,9 +4,13 @@ using System.Text;
 
 namespace Base_Conhecimento
 {
-   public class ChamadoUserViewModel
+   public class ChamadoSolucaoUserViewModel
     {
-        public Chamado chamadosModel { get; set; }
+        public Chamado chamadoModel { get; set; }
+
         public Usuario usuarioModel { get; set; }
+
+        public Solucao solucaoModel { get; set; }
+
     }
 }

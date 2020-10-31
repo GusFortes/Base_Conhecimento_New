@@ -12,8 +12,14 @@ namespace Base_Conhecimento
         private Solucao solucaoaux = new Solucao();
         public static FachadaBase fachada;
         private Chamado chamadoaux;
-        public static Usuario usuarioLogado;
+        public static Usuario usuarioLogado = new Usuario();
         public int idSolucao;
+
+
+        public Usuario retornaUsuario()
+        {
+            return usuarioLogado;
+        }
 
         public List<Solucao> consultaTodasSolucoes()
         {
@@ -36,6 +42,11 @@ namespace Base_Conhecimento
             sol.usuarioID = usuarioLogado.usuarioID;
             chamadoaux.usuarioID = usuarioLogado.usuarioID;
             return solucaoDao.persistirInformacoes(sol, cham);
+        }
+
+        public void Logout()
+        {
+            usuarioLogado = new Usuario();
         }
 
         public static FachadaBase getInstance()
@@ -120,7 +131,7 @@ namespace Base_Conhecimento
 
         public Usuario Login(int id)
         {
-            if (usuarioLogado == null)
+            if (usuarioLogado.usuarioID == 0)
             {
                 usuarioLogado = usuarioDao.consultaUsuario(id);
             }

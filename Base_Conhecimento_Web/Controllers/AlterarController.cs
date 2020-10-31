@@ -16,17 +16,24 @@ namespace Base_Conhecimento_Web.Controllers
         public static int id = 0;
 
 
-        public IActionResult Index()
+        public IActionResult Index(Solucao sol)
         {
             Usuario user = fachada.Login(id);
 
-            if (user == null)
+            if (user.usuarioID == 0)
             {
                 return RedirectToAction("Index", "Login");
             }
             else
             {
-                return View();
+                if (user.nivel)
+                {
+                    return View(sol);
+                }
+                else
+                {
+                    return View("Erro");
+                }
             }
         }
 
@@ -38,11 +45,20 @@ namespace Base_Conhecimento_Web.Controllers
             solucoes.Add(fachada.consultaSolucaoId(id));
             if (solucoes.Count > 0)
             {
+                if (solucoes.First().solucaoID == 0)
+                {
+                    ModelState.AddModelError("solucaoID", "Solução não encontrada.");
+
+                    return View("Index", sol);
+                }
+
                 return View("Resultado", solucoes);
             }
             else
             {
-                return View("SemResultado");
+                ModelState.AddModelError("solucaoID", "Solução não encontrada.");
+
+                return View("Index", sol);
             }
         }
 

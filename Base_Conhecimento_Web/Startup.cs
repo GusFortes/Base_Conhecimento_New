@@ -63,8 +63,8 @@ namespace Base_Conhecimento_Web
             {
                 endpoints.MapControllerRoute(
                     "Like",
-                    "Consulta/like/{solucao}",
-                    new { controller = "Consulta", action = "Like", solucao = 0 });
+                    "Consulta/like/{solucao}/",
+                    new { controller = "Consulta", action = "Like", solucao = 0, curtida = false });
                 endpoints.MapRazorPages();
 
                 endpoints.MapControllerRoute(

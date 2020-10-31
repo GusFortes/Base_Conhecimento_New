@@ -8,17 +8,16 @@ namespace Base_Conhecimento.DAO
 {
     class SolucaoDAO : ISolucaoDAO
     {
-        private readonly BaseContext db = new BaseContext();
+        private BaseContext db = new BaseContext();
+        private bool salvou;
         public ChamadoSolucaoViewModel persistirInformacoes(Solucao solucao, Chamado chamado)
         {
+            db = new BaseContext();
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
-            try
-            {
-                chamadoSolucao.solucaoModel = persistirSolucao(solucao);
-                chamado.solucaoID = chamadoSolucao.solucaoModel.solucaoID;
-                chamadoSolucao.chamadoModel = persistirChamado(chamado);
-            }
-            catch { throw new NotImplementedException("Erro ao Gravar Solução. Verifique os dados e tente novamente."); }
+            chamadoSolucao.solucaoModel = persistirSolucao(solucao);
+            chamado.solucaoID = chamadoSolucao.solucaoModel.solucaoID;
+            chamadoSolucao.chamadoModel = persistirChamado(chamado);
+
             return chamadoSolucao;
         }
 
@@ -54,7 +53,7 @@ namespace Base_Conhecimento.DAO
                     String nomeDosArquivos = "";
                     foreach (var nomeAquivoSolucao in solucao.arquivos)
                     {
-                        nomeDosArquivos = nomeDosArquivos + "/" + nomeAquivoSolucao.FileName;
+                        nomeDosArquivos = nomeDosArquivos + "/" + contador+"_"+nomeAquivoSolucao.FileName;
                     }
 
                     db.Solucao.Add(new Solucao
@@ -86,47 +85,129 @@ namespace Base_Conhecimento.DAO
                         }
                         solucao.nomeArquivos = arquivonome;
                     }
-                    return solucao;
+
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
-                throw new NotImplementedException("Erro ao Gravar Solução. Verifique os dados e tente novamente.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                solucao.solucaoID = -1;
             }
 
+            return solucao;
         }
+        public Chamado persistirChamado(Chamado chamado)
+        {
+            try
+            {
+                if (chamado.arquivos == null)
+                {
+                    db.Chamado.Add(new Chamado
+                    {
+                        chamadoID = chamado.chamadoID,
+                        descricao = chamado.descricao,
+                        usuarioID = chamado.usuarioID,
+                        solucaoID = chamado.solucaoID,
+                        itemCatalogo = chamado.itemCatalogo
+                    });
+                    db.SaveChanges();
+                    return chamado;
+                }
+                else
+                {
+                    String nomeDosArquivos = "";
+                    foreach (var nomeAquivoChamado in chamado.arquivos)
+                    {
+                        nomeDosArquivos = nomeDosArquivos + "/" + chamado.solucaoID+"_"+nomeAquivoChamado.FileName;
+                    }
+                    db.Chamado.Add(new Chamado
+                    {
+                        chamadoID = chamado.chamadoID,
+                        descricao = chamado.descricao,
+                        usuarioID = chamado.usuarioID,
+                        solucaoID = chamado.solucaoID,
+                        itemCatalogo = chamado.itemCatalogo,
+                        nomeArquivo = nomeDosArquivos
+                    });
+                    db.SaveChanges();
 
+
+                    if (nomeDosArquivos != "")
+                    {
+                        List<String> arquivonome = new List<String>();
+                        foreach (String nomeArquivo in nomeDosArquivos.Split("/"))
+                        {
+                            if (nomeArquivo == "") { }
+                            else
+                            {
+                                arquivonome.Add(chamado.solucaoID + "_" + nomeArquivo);
+                            }
+                        }
+                        chamado.nomeArquivos = arquivonome;
+                    }
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                chamado.solucaoID = -1;
+            }
+            return chamado;
+        }
         internal void incrimentarCurtidas(int id)
         {
-            var solucao = from s in db.Solucao
-                          where s.solucaoID == id
-                          select s;
-
-            foreach (Solucao sol in solucao)
+            db = new BaseContext();
+            try
             {
-                sol.curtidas++;
-            }
-            db.SaveChanges();
-        }
+                var solucao = from s in db.Solucao
+                              where s.solucaoID == id
+                              select s;
 
+                foreach (Solucao sol in solucao)
+                {
+                    sol.curtidas++;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
         internal void incrimentarVisitas(int id)
         {
-            var solucao = from s in db.Solucao
-                          where s.solucaoID == id
-                          select s;
 
-            foreach (Solucao sol in solucao)
+            db = new BaseContext();
+            try
             {
-                sol.visitas++;
-            }
-            db.SaveChanges();
-        }
+                var solucao = from s in db.Solucao
+                              where s.solucaoID == id
+                              select s;
 
+                foreach (Solucao sol in solucao)
+                {
+                    sol.visitas++;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
         public Chamado ExcluirArquivoChamado(string nome)
         {
+            db = new BaseContext();
             Chamado chamado = new Chamado();
             List<String> arquivonome = new List<String>();
+
             foreach (String nomeArquivo in nome.Split("_"))
             {
                 arquivonome.Add(nomeArquivo);
@@ -134,6 +215,7 @@ namespace Base_Conhecimento.DAO
             }
             int id = Int32.Parse(arquivonome.First());
             String arquivo = arquivonome.Last();
+
             var c = from s in db.Chamado
                     where s.solucaoID == id
                     select s;
@@ -148,7 +230,7 @@ namespace Base_Conhecimento.DAO
                     listaDeNomes.Add(nomeArquivo);
                 }
 
-                listaDeNomes.Remove(arquivo);
+                listaDeNomes.Remove(nome);
 
                 if (listaDeNomes.Count() > 1)
                 {
@@ -166,9 +248,9 @@ namespace Base_Conhecimento.DAO
             db.SaveChanges();
             return chamado;
         }
-
         public Solucao ExcluirArquivoSolucao(string nome)
         {
+            db = new BaseContext();
             Solucao solucao = new Solucao();
             List<String> arquivonome = new List<String>();
             foreach (String nomeArquivo in nome.Split("_"))
@@ -193,7 +275,7 @@ namespace Base_Conhecimento.DAO
                     listaDeNomes.Add(nomeArquivo);
                 }
 
-                listaDeNomes.Remove(arquivo);
+                listaDeNomes.Remove(nome);
 
                 if (listaDeNomes.Count() > 1)
                 {
@@ -211,68 +293,9 @@ namespace Base_Conhecimento.DAO
             db.SaveChanges();
             return solucao;
         }
-
-        public Chamado persistirChamado(Chamado chamado)
-        {
-            try
-            {
-                if (chamado.arquivos == null)
-                {
-                    db.Chamado.Add(new Chamado
-                    {
-                        chamadoID = chamado.chamadoID,
-                        descricao = chamado.descricao,
-                        usuarioID = chamado.usuarioID,
-                        solucaoID = chamado.solucaoID,
-                        itemCatalogo = chamado.itemCatalogo
-                    });
-                    db.SaveChanges();
-                    return chamado;
-                }
-                else
-                {
-                    String nomeDosArquivos = "";
-                    foreach (var nomeAquivoChamado in chamado.arquivos)
-                    {
-                        nomeDosArquivos = nomeDosArquivos + "/" + nomeAquivoChamado.FileName;
-                    }
-                    db.Chamado.Add(new Chamado
-                    {
-                        chamadoID = chamado.chamadoID,
-                        descricao = chamado.descricao,
-                        usuarioID = chamado.usuarioID,
-                        solucaoID = chamado.solucaoID,
-                        itemCatalogo = chamado.itemCatalogo,
-                        nomeArquivo = nomeDosArquivos
-                    });
-                    db.SaveChanges();
-                    
-
-                    if (nomeDosArquivos != "")
-                    {
-                        List<String> arquivonome = new List<String>();
-                        foreach (String nomeArquivo in nomeDosArquivos.Split("/"))
-                        {
-                            if (nomeArquivo == "") { }
-                            else
-                            {
-                                arquivonome.Add(chamado.solucaoID + "_" + nomeArquivo);
-                            }
-                        }
-                        chamado.nomeArquivos = arquivonome;
-                    }
-                    return chamado;
-                }
-            }
-
-            catch
-            {
-                throw new NotImplementedException("Erro ao Gravar Chamado. Verifique os dados e tente novamente.");
-            }
-        }
-
         public List<Chamado> consultaTodosChamados()
         {
+            db = new BaseContext();
             List<Chamado> chamados = new List<Chamado>();
             var chamadosencontrados = from c in db.Chamado
                                       select c;
@@ -285,9 +308,9 @@ namespace Base_Conhecimento.DAO
             return chamados;
 
         }
-
         public Chamado consultaChamadoId(String id)
         {
+            db = new BaseContext();
             Chamado chamado = new Chamado();
 
             var c = from s in db.Chamado
@@ -315,9 +338,9 @@ namespace Base_Conhecimento.DAO
 
             return chamado;
         }
-
         public Chamado consultaChamadoporIdSolucao(int id)
         {
+            db = new BaseContext();
             Chamado chamado = new Chamado();
 
             var c = from s in db.Chamado
@@ -337,7 +360,7 @@ namespace Base_Conhecimento.DAO
                     if (nome == "") { }
                     else
                     {
-                        arquivoNome.Add(chamado.solucaoID + "_" + nome);
+                        arquivoNome.Add(nome);
                     }
                 }
 
@@ -345,9 +368,9 @@ namespace Base_Conhecimento.DAO
             chamado.nomeArquivos = arquivoNome;
             return chamado;
         }
-
         public List<Solucao> consultaTodasSolucoes()
         {
+            db = new BaseContext();
             List<Solucao> solucoes = new List<Solucao>();
             var solucao = from s in db.Solucao
                           select s;
@@ -373,9 +396,9 @@ namespace Base_Conhecimento.DAO
 
             return solucoes;
         }
-
         public Solucao consultaSolucaoId(int id)
         {
+            db = new BaseContext();
             Solucao solucaoencontrada = new Solucao();
 
             var solucao = from s in db.Solucao
@@ -394,7 +417,7 @@ namespace Base_Conhecimento.DAO
                     if (nome == "") { }
                     else
                     {
-                        arquivoNome.Add(solucaoencontrada.solucaoID + "_" + nome);
+                        arquivoNome.Add(nome);
                     }
                 }
                 solucaoencontrada.nomeArquivos = arquivoNome;
@@ -406,9 +429,9 @@ namespace Base_Conhecimento.DAO
             }
             return solucaoencontrada;
         }
-
         public Solucao alterarSolucao(Solucao solucao)
         {
+            db = new BaseContext();
 
             var solucoes = from s in db.Solucao
                            where s.solucaoID == solucao.solucaoID
@@ -434,7 +457,7 @@ namespace Base_Conhecimento.DAO
                     String nomeDosArquivos = "";
                     foreach (var nomeAquivoSolucao in solucao.arquivos)
                     {
-                        nomeDosArquivos = nomeDosArquivos + "/" + nomeAquivoSolucao.FileName;
+                        nomeDosArquivos = nomeDosArquivos + "/" + solucao.solucaoID+"_"+nomeAquivoSolucao.FileName;
                     }
 
                     foreach (Solucao s in solucoes)
@@ -457,7 +480,7 @@ namespace Base_Conhecimento.DAO
                             if (nomeArquivo == "") { }
                             else
                             {
-                                arquivonome.Add(solucao.solucaoID + "_" + nomeArquivo);
+                                arquivonome.Add(nomeArquivo);
                             }
                         }
                         solucao.nomeArquivos = arquivonome;
@@ -465,68 +488,76 @@ namespace Base_Conhecimento.DAO
 
                 }
                 db.SaveChanges();
-                return solucao;
-            }
-            catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
-        }
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+            return solucao;
+        }
         public Chamado alterarChamado(Chamado chamado)
         {
+            db = new BaseContext();
             var chamados = from c in db.Chamado
                            where c.solucaoID == chamado.solucaoID
                            select c;
             try
             {
                 if (chamado.arquivos == null)
-            {
+                {
 
-                foreach (Chamado c in chamados)
-                {
-                    c.descricao = chamado.descricao;
-                    c.itemCatalogo = chamado.itemCatalogo;
-                }
-
-            }
-            else
-            {
-                String nomeDosArquivos = "";
-                foreach (var nomeAquivoChamado in chamado.arquivos)
-                {
-                    nomeDosArquivos = nomeDosArquivos + "/" + nomeAquivoChamado.FileName;
-                }
-                foreach (Chamado c in chamados)
-                {
-                    c.descricao = chamado.descricao;
-                    c.itemCatalogo = chamado.itemCatalogo;
-                    c.nomeArquivo = c.nomeArquivo + nomeDosArquivos;
-                    c.usuarioID = chamado.usuarioID;
-                    nomeDosArquivos = c.nomeArquivo;
-                }
-
-                if (nomeDosArquivos != "")
-                {
-                    List<String> arquivonome = new List<String>();
-                    foreach (String nomeArquivo in nomeDosArquivos.Split("/"))
+                    foreach (Chamado c in chamados)
                     {
-                        if (nomeArquivo == "") { }
-                        else
-                        {
-                            arquivonome.Add(chamado.solucaoID + "_" + nomeArquivo);
-                        }
+                        c.descricao = chamado.descricao;
+                        c.itemCatalogo = chamado.itemCatalogo;
                     }
-                    chamado.nomeArquivos = arquivonome;
+
                 }
-            }
+                else
+                {
+                    String nomeDosArquivos = "";
+                    foreach (var nomeAquivoChamado in chamado.arquivos)
+                    {
+                        nomeDosArquivos = nomeDosArquivos + "/" + chamado.solucaoID+"_"+nomeAquivoChamado.FileName;
+                    }
+                    foreach (Chamado c in chamados)
+                    {
+                        c.descricao = chamado.descricao;
+                        c.itemCatalogo = chamado.itemCatalogo;
+                        c.nomeArquivo = c.nomeArquivo + nomeDosArquivos;
+                        c.usuarioID = chamado.usuarioID;
+                        nomeDosArquivos = c.nomeArquivo;
+                    }
 
-            db.SaveChanges();
+                    if (nomeDosArquivos != "")
+                    {
+                        List<String> arquivonome = new List<String>();
+                        foreach (String nomeArquivo in nomeDosArquivos.Split("/"))
+                        {
+                            if (nomeArquivo == "") { }
+                            else
+                            {
+                                arquivonome.Add(nomeArquivo);
+                            }
+                        }
+                        chamado.nomeArquivos = arquivonome;
+                    }
+                }
+
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
             return chamado;
-            }
-            catch { throw new NotImplementedException("Erro ao alterar solução. Favor, verificar."); }
-
         }
-
-        public List<Solucao> consultaSolucoes(string problema, Usuario usuario)
-        {
+        public List<Solucao> consultaSolucoes(string problema, Usuario usuario){
+            db = new BaseContext();
             List<String> palavrasProblemas = new List<String>();
             List<Solucao> solucoesencontradas = new List<Solucao>();
 
@@ -539,7 +570,7 @@ namespace Base_Conhecimento.DAO
                 foreach (var palavra in palavrasProblemas)
                 {
                     var solucao = from s in db.Solucao
-                                  where s.descricao.Contains(palavra)
+                                  where s.descricao.Contains(palavra) && s.status.Contains("Ativo")
                                   select s;
 
                     foreach (Solucao se in solucao)

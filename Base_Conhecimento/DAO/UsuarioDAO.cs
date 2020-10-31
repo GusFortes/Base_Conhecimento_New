@@ -12,6 +12,7 @@ namespace Base_Conhecimento.DAO
         Usuario usuario;
         public Usuario consultaUsuario(int id)
         {
+            usuario = new Usuario();
 
             var user = from u in db.Usuario
                           where u.usuarioID == id
@@ -19,7 +20,9 @@ namespace Base_Conhecimento.DAO
 
             foreach (Usuario u in user)
             {
+                //if(u.senha == user.senha){}
                 usuario = u;
+
             }
 
             return usuario;
