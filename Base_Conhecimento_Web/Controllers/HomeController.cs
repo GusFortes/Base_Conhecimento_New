@@ -18,20 +18,30 @@ namespace Base_Conhecimento.Controllers
 
             List<Chamado> chamados = fachada.consultaTodosChamados();
             Usuario usuarioLogado = fachada.retornaUsuario();
-
             List<ChamadoSolucaoUserViewModel> cs = new List<ChamadoSolucaoUserViewModel>();
 
-            foreach (Chamado c in chamados)
+            if (chamados == null || chamados.Count == 0)
             {
-                ChamadoSolucaoUserViewModel chamadoSolucao = new ChamadoSolucaoUserViewModel();
-                chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(c.solucaoID);
-                chamadoSolucao.chamadoModel = c;
-                chamadoSolucao.usuarioModel = usuarioLogado;
-                if (chamadoSolucao.solucaoModel.status.Equals("Ativo"))
+                ChamadoSolucaoUserViewModel chamadoSolucaoAux = new ChamadoSolucaoUserViewModel();
+                chamadoSolucaoAux.usuarioModel = usuarioLogado;
+                cs.Add(chamadoSolucaoAux);
+            }
+            else
+            {
+
+                foreach (Chamado c in chamados)
                 {
-                    cs.Add(chamadoSolucao);
+                    ChamadoSolucaoUserViewModel chamadoSolucao = new ChamadoSolucaoUserViewModel();
+                    chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(c.solucaoID);
+                    chamadoSolucao.chamadoModel = c;
+                    chamadoSolucao.usuarioModel = usuarioLogado;
+                    if (chamadoSolucao.solucaoModel.status.Equals("Ativo"))
+                    {
+                        cs.Add(chamadoSolucao);
+                    }
                 }
             }
+
             return View(cs);
         }
 

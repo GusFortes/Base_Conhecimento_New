@@ -19,7 +19,7 @@ namespace Base_Conhecimento
 
         [Display(Name = "Título")]
         public String titulo { get; set; }
-        public int usuarioID { get; set; }
+        public String usuarioID { get; set; }
 
         [AllowHtml]
         [Display(Name = "Descrição")]
@@ -32,6 +32,7 @@ namespace Base_Conhecimento
         public String nomeArquivo { get; set; }
         public int visitas { get; set; }
         public int curtidas { get; set; }
+        public DateTime dataInclusao { get; set; }
 
         [NotMapped]
         public List<IFormFile> arquivos { get; set; }

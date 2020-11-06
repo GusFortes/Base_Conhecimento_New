@@ -12,14 +12,15 @@ namespace Base_Conhecimento_Web.Controllers
     public class CriarController : Controller
     {
         private FachadaBase fachada = FachadaBase.getInstance();
-        public static int id = 0;
+        public static string id = "";
 
         public IActionResult Index()
         {
-            Usuario user = fachada.Login(id);
+            Usuario user = new Usuario();
+
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
 
-            if (user.usuarioID == 0)
+            if (fachada.Login(user).nome == null)
             {
                 return RedirectToAction("Index", "Login");
             }

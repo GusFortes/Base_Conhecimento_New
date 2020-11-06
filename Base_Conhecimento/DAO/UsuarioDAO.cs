@@ -10,19 +10,23 @@ namespace Base_Conhecimento.DAO
     {
         private readonly BaseContext db = new BaseContext();
         Usuario usuario;
-        public Usuario consultaUsuario(int id)
+        public Usuario consultaUsuario(Usuario usuario)
         {
-            usuario = new Usuario();
-
             var user = from u in db.Usuario
-                          where u.usuarioID == id
-                          select u;
+                       where u.usuarioID.Equals(usuario.usuarioID)
+                       select u;
 
             foreach (Usuario u in user)
             {
-                //if(u.senha == user.senha){}
-                usuario = u;
-
+                if (u.senha == usuario.senha)
+                {
+                    return u;
+                }
+                else
+                {
+                    Usuario usuarionaoencontrado = new Usuario();
+                    return usuarionaoencontrado;
+                }
             }
 
             return usuario;

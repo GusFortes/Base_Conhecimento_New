@@ -13,22 +13,23 @@
 
 <body>
 
-    
-        @if (Model.First().usuarioModel.usuarioID == 0)
-        {
-    <div class="container" id="login">
-        @Html.ActionLink("Login", "Login", "" ,"" , new { @class = "btn btn-outline-primary btn-sm" })
-        
-    </div>
-        }
-        else
-        {
-<div class="container" id="login">
-    Olá @Html.DisplayFor(modelItem => Model.First().usuarioModel.nome)
-    @Html.ActionLink("Logout", "Logout", "", "", new { @class = "btn btn-outline-primary btn-sm" })
-</div>
-        }
-    
+
+
+    @if (Model.First().usuarioModel.usuarioID == null)
+    {
+        <div class="container" id="login">
+            @Html.ActionLink("Login", "Login", "", "", new { @class = "btn btn-outline-primary btn-sm" })
+
+        </div>
+    }
+    else
+    {
+        <div class="container" id="login">
+            Olá @Html.DisplayFor(modelItem => Model.First().usuarioModel.nome)
+            @Html.ActionLink("Logout", "Logout", "", "", new { @class = "btn btn-outline-primary btn-sm" })
+        </div>
+    }
+
 
 
     <div class="text-center">
@@ -39,27 +40,39 @@
         O que você procura? <input class="form-control-sm" type="search" id="pesquisa" oninput="limpar()" placeholder="Digite seu problema"> <button class="btn btn-secondary btn-sm" type="button" onclick="filtrar()">Buscar</button>
     </div>
     <br>
-    <div class="container" id="solucao">
-        <section id="content">
-            <br />
-            <ul id="lista">
-                @foreach (var item in Model)
-                {
-                    <li>
-                        <div class="container" id="titulo">
-                            @Html.DisplayFor(modelItem => item.chamadoModel.chamadoID)- @Html.DisplayFor(modelItem => item.solucaoModel.titulo)
-                        </div>
-                        @Html.Raw(item.chamadoModel.descricao)
-                        @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoModel.chamadoID }, new { @class = "label label-warning" })
-                        <hr />
-                    </li>
+    @if (Model.First().chamadoModel != null)
+    {
+        <div class="container" id="solucao">
+            <section id="content">
+                <br />
+                <ul id="lista">
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <div class="container" id="titulo">
+                                @Html.DisplayFor(modelItem => item.chamadoModel.chamadoID)- @Html.DisplayFor(modelItem => item.solucaoModel.titulo)
+                            </div>
+                            @Html.Raw(item.chamadoModel.descricao)
+                            @Html.ActionLink("Ver mais...", "Solucao", new { id = item.chamadoModel.chamadoID }, new { @class = "label label-warning" })
+                            <hr />
+                        </li>
 
-                }
-            </ul>
+                    }
+                </ul>
 
 
-        </section>
-    </div>
+            </section>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <p>
+                Cadastre a primeira solução, @Html.ActionLink("clicando aqui", "Index", "Criar", "", new { @class = "label label-warning" })
+            </p>
+
+        </div>
+    }
 
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

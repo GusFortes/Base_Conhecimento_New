@@ -12,9 +12,7 @@ namespace Base_Conhecimento
     {
         [Display(Name = "Código do Chamado")]
         public String chamadoID { get; set; }
-
-
-        public int usuarioID { get; set; }
+        public String usuarioID { get; set; }
 
         [Display(Name = "Código da Solução")]
         public int solucaoID { get; set; }

@@ -8,11 +8,13 @@ namespace Base_Conhecimento
 {
     public class Usuario
     {
-        public int usuarioID { get; set; }
+        [Display(Name = "Usuário")]
+        public String usuarioID { get; set; }
+        [Display(Name = "Senha")]
+        public String senha { get; set; }
         public String nome { get; set; }
         public String area { get; set; }
         public bool nivel { get; set; }
-        [NotMapped]
-        public bool login { get; set; }
+
     }
 }

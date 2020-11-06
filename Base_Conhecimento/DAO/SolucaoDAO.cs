@@ -9,7 +9,6 @@ namespace Base_Conhecimento.DAO
     class SolucaoDAO : ISolucaoDAO
     {
         private BaseContext db = new BaseContext();
-        private bool salvou;
         public ChamadoSolucaoViewModel persistirInformacoes(Solucao solucao, Chamado chamado)
         {
             db = new BaseContext();
@@ -38,6 +37,7 @@ namespace Base_Conhecimento.DAO
                         titulo = solucao.titulo,
                         usuarioID = solucao.usuarioID,
                         descricao = solucao.descricao,
+                        dataInclusao = DateTime.Now,
                         dataAtualizacao = solucao.dataAtualizacao,
                         visualizacao = solucao.visualizacao,
                         status = "Ativo",
@@ -53,7 +53,7 @@ namespace Base_Conhecimento.DAO
                     String nomeDosArquivos = "";
                     foreach (var nomeAquivoSolucao in solucao.arquivos)
                     {
-                        nomeDosArquivos = nomeDosArquivos + "/" + contador+"_"+nomeAquivoSolucao.FileName;
+                        nomeDosArquivos = nomeDosArquivos + "/" + contador + "_" + nomeAquivoSolucao.FileName;
                     }
 
                     db.Solucao.Add(new Solucao
@@ -62,6 +62,7 @@ namespace Base_Conhecimento.DAO
                         titulo = solucao.titulo,
                         usuarioID = solucao.usuarioID,
                         descricao = solucao.descricao,
+                        dataInclusao = DateTime.Now,
                         dataAtualizacao = solucao.dataAtualizacao,
                         visualizacao = solucao.visualizacao,
                         status = "Ativo",
@@ -120,7 +121,7 @@ namespace Base_Conhecimento.DAO
                     String nomeDosArquivos = "";
                     foreach (var nomeAquivoChamado in chamado.arquivos)
                     {
-                        nomeDosArquivos = nomeDosArquivos + "/" + chamado.solucaoID+"_"+nomeAquivoChamado.FileName;
+                        nomeDosArquivos = nomeDosArquivos + "/" + chamado.solucaoID + "_" + nomeAquivoChamado.FileName;
                     }
                     db.Chamado.Add(new Chamado
                     {
@@ -329,7 +330,7 @@ namespace Base_Conhecimento.DAO
                     if (nome == "") { }
                     else
                     {
-                        arquivoNome.Add(chamado.solucaoID + "_" + nome);
+                        arquivoNome.Add(nome);
                     }
                 }
                 chamado.nomeArquivos = arquivoNome;
@@ -457,7 +458,7 @@ namespace Base_Conhecimento.DAO
                     String nomeDosArquivos = "";
                     foreach (var nomeAquivoSolucao in solucao.arquivos)
                     {
-                        nomeDosArquivos = nomeDosArquivos + "/" + solucao.solucaoID+"_"+nomeAquivoSolucao.FileName;
+                        nomeDosArquivos = nomeDosArquivos + "/" + solucao.solucaoID + "_" + nomeAquivoSolucao.FileName;
                     }
 
                     foreach (Solucao s in solucoes)
@@ -520,7 +521,7 @@ namespace Base_Conhecimento.DAO
                     String nomeDosArquivos = "";
                     foreach (var nomeAquivoChamado in chamado.arquivos)
                     {
-                        nomeDosArquivos = nomeDosArquivos + "/" + chamado.solucaoID+"_"+nomeAquivoChamado.FileName;
+                        nomeDosArquivos = nomeDosArquivos + "/" + chamado.solucaoID + "_" + nomeAquivoChamado.FileName;
                     }
                     foreach (Chamado c in chamados)
                     {
@@ -556,7 +557,8 @@ namespace Base_Conhecimento.DAO
             }
             return chamado;
         }
-        public List<Solucao> consultaSolucoes(string problema, Usuario usuario){
+        public List<Solucao> consultaSolucoes(string problema, Usuario usuario)
+        {
             db = new BaseContext();
             List<String> palavrasProblemas = new List<String>();
             List<Solucao> solucoesencontradas = new List<Solucao>();

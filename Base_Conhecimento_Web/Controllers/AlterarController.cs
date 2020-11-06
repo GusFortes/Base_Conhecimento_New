@@ -13,14 +13,14 @@ namespace Base_Conhecimento_Web.Controllers
     public class AlterarController : Controller
     {
         private FachadaBase fachada = FachadaBase.getInstance();
-        public static int id = 0;
+        public static string id = "0";
 
 
         public IActionResult Index(Solucao sol)
         {
-            Usuario user = fachada.Login(id);
+            Usuario user = new Usuario();
 
-            if (user.usuarioID == 0)
+            if (fachada.Login(user).usuarioID == null )
             {
                 return RedirectToAction("Index", "Login");
             }

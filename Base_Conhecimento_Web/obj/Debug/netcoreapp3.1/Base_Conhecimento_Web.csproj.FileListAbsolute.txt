@@ -235,8 +235,8 @@ C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debu
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Home\Solucao.cshtml.g.cs
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Criar\Erro.cshtml.g.cs
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Alterar\Erro.cshtml.g.cs
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
-C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Criar\Erro.cshtml.g.cs
-C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Debug\netcoreapp3.1\Razor\Views\Alterar\Erro.cshtml.g.cs

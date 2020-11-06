@@ -122,3 +122,5 @@ C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Rele
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Release\netcoreapp3.1\Base_Conhecimento_Web.dll
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Release\netcoreapp3.1\Base_Conhecimento_Web.pdb
 C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Release\netcoreapp3.1\Base_Conhecimento_Web.genruntimeconfig.cache
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Release\netcoreapp3.1\Razor\Views\Alterar\Erro.cshtml.g.cs
+C:\Users\gus_f\Desktop\Base\Base_Conhecimento_New\Base_Conhecimento_Web\obj\Release\netcoreapp3.1\Razor\Views\Criar\Erro.cshtml.g.cs

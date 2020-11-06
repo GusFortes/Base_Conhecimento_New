@@ -20,7 +20,7 @@ namespace Base_Conhecimento_Web.Controllers
         [HttpPost]
         public IActionResult Login(Usuario usuario)
         {
-            if (fachada.Login(usuario.usuarioID).usuarioID == 0)
+            if (fachada.Login(usuario).nome == null)
             {
                 ModelState.AddModelError("usuarioID", "Credenciais Inválidas. Favor, verifique."); ;
                 return View("Index", usuario);

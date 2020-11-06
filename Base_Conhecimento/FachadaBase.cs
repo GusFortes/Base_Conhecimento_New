@@ -129,11 +129,11 @@ namespace Base_Conhecimento
             return cs;
         }
 
-        public Usuario Login(int id)
+        public Usuario Login(Usuario usuario)
         {
-            if (usuarioLogado.usuarioID == 0)
+            if (usuarioLogado.nome == null)
             {
-                usuarioLogado = usuarioDao.consultaUsuario(id);
+                usuarioLogado = usuarioDao.consultaUsuario(usuario);
             }
             return usuarioLogado;
         }
