@@ -26,7 +26,7 @@ namespace Base_Conhecimento_Web.Controllers
             }
             else
             {
-                if (user.nivel)
+                if (fachada.retornaUsuario().nivel)
                 {
                     return View(chamadoSolucao);
                 }

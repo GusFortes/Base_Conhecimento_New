@@ -81,7 +81,7 @@ namespace Base_Conhecimento.DAO
                             if (nomeArquivo == "") { }
                             else
                             {
-                                arquivonome.Add(solucao.solucaoID + "_" + nomeArquivo);
+                                arquivonome.Add(nomeArquivo);
                             }
                         }
                         solucao.nomeArquivos = arquivonome;
@@ -143,7 +143,7 @@ namespace Base_Conhecimento.DAO
                             if (nomeArquivo == "") { }
                             else
                             {
-                                arquivonome.Add(chamado.solucaoID + "_" + nomeArquivo);
+                                arquivonome.Add(nomeArquivo);
                             }
                         }
                         chamado.nomeArquivos = arquivonome;

@@ -19,10 +19,9 @@ namespace Base_Conhecimento.Controllers
             List<Chamado> chamados = fachada.consultaTodosChamados();
             Usuario usuarioLogado = fachada.retornaUsuario();
             List<ChamadoSolucaoUserViewModel> cs = new List<ChamadoSolucaoUserViewModel>();
-
+            ChamadoSolucaoUserViewModel chamadoSolucaoAux = new ChamadoSolucaoUserViewModel();
             if (chamados == null || chamados.Count == 0)
             {
-                ChamadoSolucaoUserViewModel chamadoSolucaoAux = new ChamadoSolucaoUserViewModel();
                 chamadoSolucaoAux.usuarioModel = usuarioLogado;
                 cs.Add(chamadoSolucaoAux);
             }
@@ -35,10 +34,27 @@ namespace Base_Conhecimento.Controllers
                     chamadoSolucao.solucaoModel = fachada.consultaSolucaoId(c.solucaoID);
                     chamadoSolucao.chamadoModel = c;
                     chamadoSolucao.usuarioModel = usuarioLogado;
+
                     if (chamadoSolucao.solucaoModel.status.Equals("Ativo"))
                     {
-                        cs.Add(chamadoSolucao);
+                        if (fachada.retornaUsuario().nivel)
+                        {
+                            cs.Add(chamadoSolucao);
+                        }
+                        else
+                        {
+                            if (chamadoSolucao.solucaoModel.visualizacao.Equals("Cliente"))
+                            {
+                                cs.Add(chamadoSolucao);
+                            }
+                        }
+                                             
                     }
+                }
+                if (cs.Count == 0)
+                {
+                    chamadoSolucaoAux.usuarioModel = usuarioLogado;
+                    cs.Add(chamadoSolucaoAux);
                 }
             }
 
