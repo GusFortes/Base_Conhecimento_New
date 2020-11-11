@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Base\Chamado\58_Teste.txt" />
-    <Content Remove="wwwroot\Base\Solucao\58_Teste.txt" />
+
   </ItemGroup>
 
   <ItemGroup>

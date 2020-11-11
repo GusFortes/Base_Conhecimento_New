@@ -46,6 +46,13 @@ namespace Base_Conhecimento_Web.Controllers
                 ModelState.AddModelError("chamadoModel.chamadoID", "Esse código de chamado já está cadastrado. Favor, verifique.");
             }
 
+            if (!chamadoSolucao.solucaoModel.visualizacao.Equals("Analista") && !chamadoSolucao.solucaoModel.visualizacao.Equals("Cliente"))
+            {
+                ModelState.AddModelError("solucaoModel.visualizacao", "Escolha uma opção");
+            }
+
+
+
             if (ModelState.IsValid == false)
             {
                 return View("Index", chamadoSolucao);
@@ -84,7 +91,7 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 foreach (IFormFile file in model.arquivos)
                 {
-                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Solucao");
+                    string uploadsFolder = Path.Combine("wwwroot/Base/Solucao");
                     uniqueFileName = model.solucaoID + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -104,7 +111,7 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 foreach (IFormFile file in model.arquivos)
                 {
-                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado");
+                    string uploadsFolder = Path.Combine("wwwroot/Base/Chamado");
                     uniqueFileName = model.solucaoID + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))

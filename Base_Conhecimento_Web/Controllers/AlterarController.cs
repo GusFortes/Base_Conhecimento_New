@@ -106,7 +106,7 @@ namespace Base_Conhecimento_Web.Controllers
 
             if (nome == null) { }
 
-            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado/" + nome);
+            var arquivo = Path.Combine("wwwroot/Base/Chamado/" + nome);
 
             int id = 0;
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
@@ -130,7 +130,7 @@ namespace Base_Conhecimento_Web.Controllers
 
             if (nome == null) { }
 
-            var arquivo = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Solucao/" + nome);
+            var arquivo = Path.Combine("wwwroot/Base/Solucao/" + nome);
 
             int id = 0;
             ChamadoSolucaoViewModel chamadoSolucao = new ChamadoSolucaoViewModel();
@@ -156,7 +156,7 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 foreach (IFormFile file in model.arquivos)
                 {
-                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Solucao");
+                    string uploadsFolder = Path.Combine("wwwroot/Base/Solucao");
                     uniqueFileName = model.solucaoID + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -176,7 +176,7 @@ namespace Base_Conhecimento_Web.Controllers
             {
                 foreach (IFormFile file in model.arquivos)
                 {
-                    string uploadsFolder = Path.Combine("C:/Users/gus_f/Desktop/Base/Base_Conhecimento_New/Base_Conhecimento_Web/wwwroot/Base/Chamado");
+                    string uploadsFolder = Path.Combine("wwwroot/Base/Chamado");
                     uniqueFileName = model.solucaoID + "_" + file.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))

@@ -9,7 +9,7 @@ namespace Base_Conhecimento
         public DbSet<Solucao> Solucao { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Base_Conhecimento;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-1P3K58G;Database=Base_Conhecimento;Trusted_Connection=True;");
         }
     }
 }

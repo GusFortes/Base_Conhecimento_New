@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EnaCO4Thm6NA2Nq3tUk/AyB91N1d1BRMv0GsWnVamFqdrLGbgv7z29b+hbEY0zOp5kk/zJ+Fjyrmjx8CSg5wiA==",
+  "dgSpecHash": "068BJ7L7ZinSyxbqxCqRj/pjlwxMMAF8uw9G2k6e94t1oKf0Xq0mNKE4XcqWVrfJvw5Z51jfJaKG4+V0SmhNaw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gus_f\\Desktop\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj",
+  "projectFilePath": "C:\\Users\\gus_f\\Desktop\\WEB\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gus_f\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\gus_f\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",
