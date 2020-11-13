@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Base_Conhecimento
 {
@@ -9,7 +11,13 @@ namespace Base_Conhecimento
         public DbSet<Solucao> Solucao { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-1P3K58G;Database=Base_Conhecimento;Trusted_Connection=True;");
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+
         }
     }
 }

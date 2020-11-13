@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\gus_f\Desktop\WEB\Base\Base_Conhecimento_New\publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\gus_f\Desktop\WEB2\Base_Conhecimento_New-main\publish</_PublishTargetUrl>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
   </PropertyGroup>
   <ItemGroup>

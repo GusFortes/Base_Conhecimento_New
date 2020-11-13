@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gus_f\\Desktop\\WEB\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj": {}
+    "C:\\Users\\gus_f\\Desktop\\WEB2\\Base_Conhecimento_New-main\\Base_Conhecimento\\Base_Conhecimento.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gus_f\\Desktop\\WEB\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj": {
+    "C:\\Users\\gus_f\\Desktop\\WEB2\\Base_Conhecimento_New-main\\Base_Conhecimento\\Base_Conhecimento.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gus_f\\Desktop\\WEB\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj",
+        "projectUniqueName": "C:\\Users\\gus_f\\Desktop\\WEB2\\Base_Conhecimento_New-main\\Base_Conhecimento\\Base_Conhecimento.csproj",
         "projectName": "Base_Conhecimento",
-        "projectPath": "C:\\Users\\gus_f\\Desktop\\WEB\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\Base_Conhecimento.csproj",
+        "projectPath": "C:\\Users\\gus_f\\Desktop\\WEB2\\Base_Conhecimento_New-main\\Base_Conhecimento\\Base_Conhecimento.csproj",
         "packagesPath": "C:\\Users\\gus_f\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gus_f\\Desktop\\WEB\\Base\\Base_Conhecimento_New\\Base_Conhecimento\\obj\\",
+        "outputPath": "C:\\Users\\gus_f\\Desktop\\WEB2\\Base_Conhecimento_New-main\\Base_Conhecimento\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -60,6 +60,14 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.8, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
